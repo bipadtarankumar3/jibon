@@ -37,7 +37,7 @@
                 <a href="contact.html">Contact</a>
               </li>
               <li class="nav-item">
-               <a href="{{URL::TO('abcd')}}">Admin</a>
+                <a href="{{URL::TO('admin/login')}}">Admin</a>
               </li>
               <li class="nav-item">
                 <a href="#">BranchT</a>
