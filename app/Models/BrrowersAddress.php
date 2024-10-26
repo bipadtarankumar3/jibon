@@ -11,4 +11,9 @@ class BrrowersAddress extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

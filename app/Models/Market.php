@@ -11,4 +11,8 @@ class Market extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    public function loanDetails()
+    {
+        return $this->hasMany(BrrowersLoanDetails::class, 'market_id');
+    }
 }

@@ -6,18 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Models\BrrowersAddress;
 use App\Models\BrrowersLoanDetails;
 use App\Models\Documents;
+use App\Models\LoanType;
+use App\Models\Market;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class BrrowersController extends Controller
 {
     public function index()
+{
+    $brrowers = User::with(['documents', 'address', 'loanDetails']) // Eager load relationships
+        ->where('user_type', "brrowers")
+        ->orderBy('id', 'desc')
+        ->get();
+
+    return view('admin.pages.brrowers.index', compact('brrowers'));
+}    public function create()
     {
-        return view('admin.pages.brrowers.index');
-    }
-    public function create()
-    {
-        return view('admin.pages.brrowers.create');
+        $data['market']=Market::orderBy('id','desc')->get();
+        $data['loan_types']=LoanType::orderBy('id','desc')->get();
+        return view('admin.pages.brrowers.create',$data);
     }
 
     public function store(Request $request)
@@ -47,11 +55,13 @@ class BrrowersController extends Controller
         $brrowers = User::create([
             'avater' => $profile_image,
             'first_name' => $request->first_name,
+            'user_type' => "brrowers",
             'middle_name' => $request->middle_name,
             'last_name' => $request->last_name,
             'father_husband_name' => $request->father_husband_name,
             'gender' => $request->gender,
-            'birth_date ' => $request->birth_date,
+            'email' => "jiban@jiban.com",
+            'birth_date' => $request->birth_date,
             'contact_number' => $request->contact_number,
             'aadhar_no' => $request->aadhaar_number,
             'pan_no' => $request->pan_card_number,
@@ -77,9 +87,9 @@ class BrrowersController extends Controller
 
                 $documentData[] = [
                     'image_name' => $uploadName,
-                    'table_name' => $table_name,
+                    'table_name' => "brrowers",
                     'item_id' => $brrowers->id,
-                    'document_type' => "attachment",
+                    'dcocument_type' => "attachment",
                 ];
 
                 Documents::insert($documentData);

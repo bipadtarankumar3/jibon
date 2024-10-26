@@ -11,4 +11,14 @@ class BrrowersLoanDetails extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function market()
+    {
+        return $this->belongsTo(Market::class, 'market_id');
+    }
 }

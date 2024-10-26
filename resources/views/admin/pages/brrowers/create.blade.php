@@ -130,8 +130,11 @@
           <div class="col-6"> 
             <label>Market :</label>
             <select class="form-select" name="market">
-              <option value="Bangalbari">Bangalbari</option>
-              <option value="Guthin">Guthin</option>
+                @foreach ($market as $m)
+                <option value="{{$m->id}}">{{$m->market_name}}</option>
+                @endforeach
+              
+              
             </select>
           </div>
           <div class="col-6"> 
@@ -158,7 +161,14 @@
         <div class="row gy-3">
           <div class="col-12">
             <label>Loan Types</label>
-            <input type="text" class="form-control" name="loan_type">
+            
+            <select class="form-select" name="loan_type">
+                @foreach ($loan_types as $loan_type)
+                <option value="{{$loan_type->id}}">{{$loan_type->loan_type}}</option>
+                @endforeach
+              
+              
+            </select>
           </div>
           <div class="col-12"> 
             <label>Principal Amount</label>
