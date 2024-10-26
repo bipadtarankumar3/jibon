@@ -7,6 +7,8 @@ use App\Http\Controllers\admin\WalletController;
 use App\Http\Controllers\admin\MarketController;
 use App\Http\Controllers\admin\LoanTypeController;
 use App\Http\Controllers\admin\UserManagementController;
+use App\Http\Controllers\admin\LoanController;
+use App\Http\Controllers\admin\TransactionController;
 
 Route::get('admin/login', [AdminAuthController::class, 'login'])->name('login');
 Route::post('admin-login-action', [AdminAuthController::class, 'adminLoginAction']);
@@ -52,7 +54,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::delete('/users/{id}', [UserManagementController::class, 'destroy'])->name('users.destroy'); // Del
 
 
-    
+    Route::get('loans', [LoanController::class,'loans']);
+    Route::get('transactions', [TransactionController::class,'transactions']);
+    Route::get('set_transaction', [TransactionController::class,'set_transaction']);
+
    
 
     // Route::group(['prefix' => 'payout', 'as' => 'payout.'], function () {

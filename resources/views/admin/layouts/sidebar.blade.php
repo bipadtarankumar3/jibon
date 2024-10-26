@@ -55,7 +55,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="loans.html">
+                    <a href="{{URL::TO('admin/loans')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
@@ -65,7 +65,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="transactions.html">
+                    <a href="{{URL::TO('admin/transactions')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
@@ -127,7 +127,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="set-transactions.html">
+                    <a href="{{URL::TO('admin/set_transaction')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path

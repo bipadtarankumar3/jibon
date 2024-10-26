@@ -12,12 +12,12 @@
     </div>
     <div class="profile_bar">
       <div class="search_box">
-        <form>
+        {{-- <form>
           <select class="form-select">
             <option>Select Borrowers</option>
             <option>Select</option>
           </select>
-        </form>
+        </form> --}}
       </div>
       <ul class="noti_prifile_box d-flex align-items-center">
          
