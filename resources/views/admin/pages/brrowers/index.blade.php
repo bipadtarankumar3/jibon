@@ -26,7 +26,7 @@
                         <td>{{ $loanDetail->user->first_name ?? 'N/A' }} {{ $loanDetail->user->last_name ?? '' }}</td>
                         <td>{{ $loanDetail->user->contact_number ?? 'N/A' }}</td>
                         <td>{{ $loanDetail->created_at->format('d/m/Y') }}</td>
-                        <td>{{ $loanDetail->principle_amount ?? 'N/A' }}</td>
+                        <td>{{ $loanDetail->total_amount ?? 'N/A' }}</td>
                         <td>{{ $loanDetail->market->market_name ?? 'N/A' }}</td>
                         <td>{{ $loanDetail->status ?? 'N/A' }}</td>
                         <td>
