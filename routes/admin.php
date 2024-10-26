@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::put('wallets/{wallet}', [WalletController::class, 'update'])->name('wallets.update');
     Route::get('wallets/{wallet}/delete', [WalletController::class, 'destroy'])->name('wallets.destroy');
 
-    Route::get('my_wallet', [AdminAuthController::class, 'my_wallet']);
+   
 
 
     Route::get('/markets', [MarketController::class, 'markets'])->name('markets.index');
