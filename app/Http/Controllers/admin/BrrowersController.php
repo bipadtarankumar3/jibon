@@ -136,7 +136,7 @@ class BrrowersController extends Controller
             'amortization' => $request->loan_type,
             'total_amount' => $request->loan_type,
             'note' => $request->loan_type,
-            'status' => $request->loan_type,
+            'status' => "process",
         ]);
 
         $request->session()->flash('success', 'Added');
