@@ -39,10 +39,7 @@ class BrrowersController extends Controller
         $validatedData = $request->validate([
             'profileimg' => 'required|string',
             'first_name' => 'required|string',
-            'middle_name' => 'nullable|string',
             'last_name' => 'required|string',
-            // Add validation rules for all other fields as necessary
-            'attachment_file.*' => 'file|mimes:jpg,jpeg,png,pdf|max:2048', // Adjust as needed
         ]);
 
         if (preg_match('/^data:image\/(\w+);base64,/', $request->profileimg, $type)) {
