@@ -23,7 +23,8 @@ return new class extends Migration
             $table->string('interest')->nullable();
             $table->string('amortization')->nullable();
             $table->string('total_amount')->nullable();
-            $table->string('note')->nullable();
+            $table->date('approve_date')->nullable();
+            $table->date('maturity_date')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();

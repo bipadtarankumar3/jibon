@@ -10,7 +10,8 @@ use App\Models\LoanType;
 use App\Models\Market;
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 class BrrowersController extends Controller
 {
     // public function index()
@@ -45,6 +46,76 @@ class BrrowersController extends Controller
        $loantype=LoanType::where('id',$request->loanTypeId)->first();
        return response()->json($loantype);
     }
+
+   
+    
+    public function approve(Request $request)
+{
+    // Validate the incoming request data
+    $request->validate([
+        'loan_detail_id' => 'required|exists:brrowers_loan_details,id',
+        'approval_date' => 'required|date',
+    ]);
+
+    // Retrieve the loan details
+    $loanDetails = BrrowersLoanDetails::findOrFail($request->loan_detail_id);
+
+    // Parse the approval date
+    $approvalDate = Carbon::parse($request->approval_date);
+
+    // Calculate the maturity date based on the loan terms (in days)
+    $maturityDate = $approvalDate->copy()->addDays($loanDetails->loan_terms);
+
+    // Calculate the monthly EMI
+    $total_amount = $loanDetails->total_amount;
+   
+    $loanTerms = $loanDetails->loan_terms; 
+
+   
+    $perDayEMI = $total_amount / $loanTerms; 
+
+    // Update the loan details
+    $loanDetails->update([
+        'approve_date' => $approvalDate,
+        'maturity_date' => $maturityDate,
+        'status' => 'Approved',
+        
+    ]);
+
+    
+
+    // Create an array to hold EMI records
+    $emiRecords = [];
+    $perDayEMIAdd =0;
+    // Prepare EMI records for each day from the approval date to maturity date
+    for ($i = 0; $i < $loanDetails->loan_terms; $i++) {
+        $emiDate = $approvalDate->copy()->addDays($i); // Increment the date by i days
+
+        // Deduct the per day EMI from the remaining amount
+        $perDayEMIAdd = $perDayEMIAdd + $perDayEMI;
+
+        // Prepare EMI record
+        $emiRecords[] = [
+            'user_id' => $loanDetails->user_id,
+            'loan_id' => $loanDetails->id,
+            'market_id' => $loanDetails->market_id,
+            'emi_date' => $emiDate->format('Y-m-d'),
+            'emi_amount' => number_format($perDayEMI, 2),
+            'remaining_amount' => number_format($total_amount -$perDayEMIAdd,2), // Store the remaining amount
+            'status' => 'due',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+    }
+
+    // Perform a bulk insert of EMI records
+    DB::table('emis')->insert($emiRecords);
+
+    // Optionally, redirect back with a success message
+    return redirect()->route('admin.brrowers.index')->with('success', 'Loan approved successfully!');
+}
+    
+    
 
     public function store(Request $request)
     {
