@@ -46,9 +46,7 @@ class AdminAuthController extends Controller
        
     }
 
-    public function add_market(){
-        return view('admin.pages.market.add_market');
-    }
+
     public function logout(Request $request){
         Auth::logout();
 

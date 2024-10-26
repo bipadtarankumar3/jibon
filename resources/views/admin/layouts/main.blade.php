@@ -149,6 +149,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js?ver=3.5.7" id="fancyboxmin-js-js">
     </script>
     <script src="{{URL::TO('public/assets/js/slick.js')}}"></script>
+    <script src="{{URL::TO('public/assets/js/customScript.js')}}"></script>
+    <script src="{{URL::TO('public/assets/js/webcamjs/webcam.min.js')}}"></script>
     <script src="{{URL::TO('public/assets/js/custom.js')}}"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
