@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::get('demand_sheet/index', [DemandSheetController::class, 'index'])->name('demand_sheet.index');
     Route::get('brrowers.index', [BrrowersController::class, 'index'])->name('brrowers.index');
     Route::get('brrowers.create', [BrrowersController::class, 'create'])->name('brrowers.create');
+    Route::post('brrowers.store', [BrrowersController::class, 'store'])->name('brrowers.store');
     Route::get('my_wallet', [WalletController::class, 'index'])->name('wallets.index');
     Route::post('wallets', [WalletController::class, 'store'])->name('wallets.store');
     Route::get('wallets/{wallet}/edit', [WalletController::class, 'edit'])->name('wallets.edit');
