@@ -44,98 +44,98 @@ let stream; // To store the camera stream
 // });
 
 // Capture button
-document.getElementById('captureButton').addEventListener('click', function() {
-  const video = document.getElementById('camera');
-  const canvas = document.getElementById('previewCanvas');
-  const context = canvas.getContext('2d');
+// document.getElementById('captureButton').addEventListener('click', function() {
+//   const video = document.getElementById('camera');
+//   const canvas = document.getElementById('previewCanvas');
+//   const context = canvas.getContext('2d');
 
-  // Draw the current frame from the video onto the canvas
-  context.drawImage(video, 0, 0, canvas.width, canvas.height);
+//   // Draw the current frame from the video onto the canvas
+//   context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-  // Stop the video stream to freeze the preview and hide the video
-  stream.getTracks().forEach(track => track.stop());
-  video.style.display = 'none';
+//   // Stop the video stream to freeze the preview and hide the video
+//   stream.getTracks().forEach(track => track.stop());
+//   video.style.display = 'none';
 
-  // Show the canvas with the captured image
-  canvas.style.display = 'block';
+//   // Show the canvas with the captured image
+//   canvas.style.display = 'block';
 
-  // Hide the capture button (since the image is captured)
-  document.getElementById('captureButton').style.display = 'none';
-});
-
-// Cancel button to reset everything
-document.getElementById('cancelCameraButton').addEventListener('click', function() {
-  const video = document.getElementById('camera');
-  const canvas = document.getElementById('previewCanvas');
-
-  // Hide the canvas and stop any video stream
-  canvas.style.display = 'none';
-  if (stream) {
-    stream.getTracks().forEach(track => track.stop());
-  }
-
-  // Hide all buttons except the open camera button
-  document.getElementById('captureButton').style.display = 'none';
-  document.getElementById('cancelCameraButton').style.display = 'none';
-  document.getElementById('openCameraButton').style.display = 'inline';
-});
-
-document.querySelector('.dropdown-menu').addEventListener('click', function(event) {
-  event.stopPropagation();
-});
-
-// mobile menu
-const mediaQuery = window.matchMedia("(max-width: 991px)");
-if (mediaQuery.matches) {
-  let elmnt = document.querySelector(".navbar");
-  let hdr = document.querySelector(".site-header");
-  hdr.insertAdjacentElement("afterend", elmnt);
-}
- 
-const header = document.querySelector(".main_head");
-const main_hldr = document.querySelector(".main_hldr");
-const toggle_button = document.querySelector(".toggle_btn");
-const tags = document.querySelector(".tags");
-const left_part = document.querySelector(".left_part");
-const dropdown_div = document.querySelector(".dropdown_div");
-
-toggle_button.addEventListener("click", function () {
-  main_hldr.classList.toggle("hide");
-  header.classList.toggle("hide");
-  dropdown_div.style.display = "none";
-});
-
-// tags.addEventListener("wheel", function (event) {
-//   event.preventDefault();
-//   this.scrollLeft += event.deltaY;
+//   // Hide the capture button (since the image is captured)
+//   document.getElementById('captureButton').style.display = 'none';
 // });
 
-left_part.addEventListener('click', function(){
-  if(main_hldr.classList.contains('hide') || header.classList.contains('hide')){
-    main_hldr.classList.remove('hide');
-    header.classList.remove('hide');
-  };
-});
+// Cancel button to reset everything
+// document.getElementById('cancelCameraButton').addEventListener('click', function() {
+//   const video = document.getElementById('camera');
+//   const canvas = document.getElementById('previewCanvas');
 
-document.querySelector('.inhouse_form').style.display = 'block';
-document.querySelector('.outsourced_form').style.display = 'none';
+//   // Hide the canvas and stop any video stream
+//   canvas.style.display = 'none';
+//   if (stream) {
+//     stream.getTracks().forEach(track => track.stop());
+//   }
 
-document.querySelector(".switching").addEventListener('click', function(event) {
-if (event.target.checked) {
- console.log('Check');
- document.querySelector('.inhouse_form').style.display = 'none';
-   document.querySelector('.outsourced_form').style.display = 'block';
-   document.querySelector('.drow_title').innerHTML = "Outsourced Drawing";
-}
-else{
-  document.querySelector('.outsourced_form').style.display = 'none';
-  document.querySelector('.inhouse_form').style.display = 'block';
-  document.querySelector('.drow_title').innerHTML = "Inhouse Drawing";
-}
-});
+//   // Hide all buttons except the open camera button
+//   document.getElementById('captureButton').style.display = 'none';
+//   document.getElementById('cancelCameraButton').style.display = 'none';
+//   document.getElementById('openCameraButton').style.display = 'inline';
+// });
+
+// document.querySelector('.dropdown-menu').addEventListener('click', function(event) {
+//   event.stopPropagation();
+// });
+
+// mobile menu
+// const mediaQuery = window.matchMedia("(max-width: 991px)");
+// if (mediaQuery.matches) {
+//   let elmnt = document.querySelector(".navbar");
+//   let hdr = document.querySelector(".site-header");
+//   hdr.insertAdjacentElement("afterend", elmnt);
+// }
+ 
+// const header = document.querySelector(".main_head");
+// const main_hldr = document.querySelector(".main_hldr");
+// const toggle_button = document.querySelector(".toggle_btn");
+// const tags = document.querySelector(".tags");
+// const left_part = document.querySelector(".left_part");
+// const dropdown_div = document.querySelector(".dropdown_div");
+
+// toggle_button.addEventListener("click", function () {
+//   main_hldr.classList.toggle("hide");
+//   header.classList.toggle("hide");
+//   dropdown_div.style.display = "none";
+// });
+
+// // tags.addEventListener("wheel", function (event) {
+// //   event.preventDefault();
+// //   this.scrollLeft += event.deltaY;
+// // });
+
+// left_part.addEventListener('click', function(){
+//   if(main_hldr.classList.contains('hide') || header.classList.contains('hide')){
+//     main_hldr.classList.remove('hide');
+//     header.classList.remove('hide');
+//   };
+// });
+
+// document.querySelector('.inhouse_form').style.display = 'block';
+// document.querySelector('.outsourced_form').style.display = 'none';
+
+// document.querySelector(".switching").addEventListener('click', function(event) {
+// if (event.target.checked) {
+//  console.log('Check');
+//  document.querySelector('.inhouse_form').style.display = 'none';
+//    document.querySelector('.outsourced_form').style.display = 'block';
+//    document.querySelector('.drow_title').innerHTML = "Outsourced Drawing";
+// }
+// else{
+//   document.querySelector('.outsourced_form').style.display = 'none';
+//   document.querySelector('.inhouse_form').style.display = 'block';
+//   document.querySelector('.drow_title').innerHTML = "Inhouse Drawing";
+// }
+// });
 
 
-const submenu = document.querySelector('.sumenuList');
-submenu.addEventListener('click', function(){
-  this.parentNode.classList.toggle('submenuopen');
-})
+// const submenu = document.querySelector('.sumenuList');
+// submenu.addEventListener('click', function(){
+//   this.parentNode.classList.toggle('submenuopen');
+// })
