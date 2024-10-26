@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="asign.html">
+                    <a href="{{route('admin.demand_sheet.index')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
@@ -45,7 +45,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="borrowers.html">
+                    <a href="{{route('admin.brrowers.index')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path

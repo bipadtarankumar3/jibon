@@ -43,7 +43,7 @@ class AdminAuthController extends Controller
         return view('admin.auth.profile');
     }
     public function my_wallet(){
-        return view('admin.auth.my_wallet');
+       
     }
 
     public function add_market(){
