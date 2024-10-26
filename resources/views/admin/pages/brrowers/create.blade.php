@@ -159,71 +159,41 @@
       <section class="pb-4 pt-5">
         <h4 class="form_title">Tell us how much loan the borrower needs.</h4>
         <div class="row gy-3">
-          <div class="col-12">
-            <label>Loan Types</label>
-            
-            <select class="form-select" name="loan_type">
-                @foreach ($loan_types as $loan_type)
-                <option value="{{$loan_type->id}}">{{$loan_type->type_name}}</option>
-                @endforeach
-              
-              
-            </select>
-          </div>
-          <div class="col-12"> 
-            <label>Principal Amount</label>
-            <input type="number" class="form-control" name="principal_amount">
-          </div>
-          <div class="col-6"> 
-            <label>Loan Terms</label>
-            <input type="text" class="form-control" name="loan_terms">
-          </div>
-          <div class="col-6"> 
-            <label>Select</label>
-           <select class="form-select" name="loan_duration_unit">
-            <option value="days">day/s</option>
-           </select>
-          </div>
-          <div class="col-6"> 
-            <label>Interest (%)</label>
-            <input type="text" class="form-control" name="interest_rate">
-          </div>
-          <div class="col-6"> 
-            <label>Amortization</label>
-            <input type="text" class="form-control" name="amortization">
-          </div>
-          <div class="col-6"> 
-            <label>Total Amount Loan</label>
-            <input type="text" class="form-control" name="total_loan_amount">
-          </div>
-          <div class="col-6"> 
-            <label>Due Date</label>
-            <input type="date" class="form-control" name="due_date">
-          </div>
+            <div class="col-12">
+                <label>Loan Types</label>
+                <select class="form-select" name="loan_type" onchange="getLoanType(this.value)">
+                    @foreach ($loan_types as $loan_type)
+                    <option value="{{$loan_type->id}}">{{$loan_type->type_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-12">
+                <label>Principal Amount</label>
+                <input type="number" class="form-control" id="principal_amount" name="principal_amount" oninput="calculateLoan()">
+            </div>
+            <div class="col-6">
+                <label>Loan Terms</label>
+                <input type="text" class="form-control" id="loan_terms" name="loan_terms" readonly>
+            </div>
+            <div class="col-6">
+                <label>Select</label>
+                <input type="text" id="loan_duration_unit" class="form-control" name="loan_duration_unit" readonly>
+            </div>
+            <div class="col-6">
+                <label>Interest (%)</label>
+                <input type="text" id="interest_rate" class="form-control" name="interest_rate" readonly>
+            </div>
+            <div class="col-6">
+                <label>Amortization</label>
+                <input type="text" id="amortization" class="form-control" name="amortization" readonly>
+            </div>
+            <div class="col-6">
+                <label>Total Amount Loan</label>
+                <input type="text" id="total_loan_amount" class="form-control" name="total_loan_amount" readonly>
+            </div>
         </div>
-      </section>
-      {{-- <h3>Bank Details</h3>
-      <section class="pb-4 pt-5">
-        <h4 class="form_title">Tell us where the borrower has an account.</h4>
-        <div class="row gy-3">
-          <div class="col-12"> 
-            <label>Account Name</label>
-            <input type="text" class="form-control" name="account_name">
-          </div>
-          <div class="col-12"> 
-            <label>Bank Name</label>
-            <input type="text" class="form-control" name="bank_name">
-          </div>
-          <div class="col-12"> 
-            <label>Account No.</label>
-            <input type="number" class="form-control" name="account_number">
-          </div>
-          <div class="col-12"> 
-            <label>IFSC Code</label>
-            <input type="text" class="form-control" name="ifsc_code">
-          </div>
-        </div>
-      </section> --}}
+    </section>
+     
     </div>
     <div class="d-flex justify-content-between">
       <button type="submit" class="btn btn-success">Save</button>
@@ -237,7 +207,59 @@
 
 
 @section('js')
+<script>
+    function getLoanType(loantypeId){
+        var loanTypeId = loantypeId;
+        console.log(loantypeId);
+        
+            $.ajax({
+                url: "{{ route('admin.loantypedetails') }}",  // URL to send the request to
+                type: "GET",
+                data:{
+                    loanTypeId:loanTypeId 
+                } , // HTTP method
+                success: function(response) {
+                    console.log(response);
+                    
+                    $('#interest_rate').val(response.interest);
+                    $('#loan_duration_unit').val(response.day_month_type);
+                    $('#loan_terms').val(response.loan_terms);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+       
+    }
+</script>
+<script>
+function calculateLoan() {
+    // Get values from the form
+    const principalAmount = parseFloat(document.getElementById('principal_amount').value) || 0;
+    const loanTerms = parseInt(document.getElementById('loan_terms').value) || 0;
+    const interestRate = parseFloat(document.getElementById('interest_rate').value) || 0;
+    const loanDurationUnit = document.getElementById('loan_duration_unit').value.toLowerCase();
 
+    // Calculate the interest as a decimal
+    const interestDecimal = interestRate / 100;
+
+    // Calculate Total Amount Loan (principal + total interest over the term)
+    const totalLoanAmount = principalAmount + (principalAmount * interestDecimal * loanTerms);
+
+    // Calculate Amortization based on days or months
+    let amortization = 0;
+    if (loanDurationUnit === 'month') {
+        amortization = totalLoanAmount / loanTerms; // Monthly amortization
+    } else if (loanDurationUnit === 'day') {
+        amortization = totalLoanAmount / (loanTerms * 30); // Daily amortization, assuming 30 days per month
+    }
+
+    // Set calculated values in the form
+    document.getElementById('total_loan_amount').value = totalLoanAmount.toFixed(2);
+    document.getElementById('amortization').value = totalLoanAmount.toFixed(2);
+}
+
+    </script>
 <script>
       function open_cam () {
         Webcam.attach('#my_camera');
@@ -269,5 +291,7 @@
         // Remove the specific attachment div
         element.closest('.attachment').remove();
     }
+
+    
 </script>
 @endsection
