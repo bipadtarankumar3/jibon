@@ -13,14 +13,26 @@ use Illuminate\Http\Request;
 
 class BrrowersController extends Controller
 {
+    // public function index()
+    // {
+    //     $brrowers = User::with(['documents', 'address', 'loanDetails']) // Eager load relationships
+    //         ->where('user_type', "brrowers")
+    //         ->orderBy('id', 'desc')
+    //         ->get();
+
+    //     return view('admin.pages.brrowers.index', compact('brrowers'));
+    // }
     public function index()
     {
-        $brrowers = User::with(['documents', 'address', 'loanDetails']) // Eager load relationships
-            ->where('user_type', "brrowers")
-            ->orderBy('id', 'desc')
-            ->get();
-
-        return view('admin.pages.brrowers.index', compact('brrowers'));
+        $loanDetails = BrrowersLoanDetails::with(['user', 'market']) // Eager load related models
+        ->whereHas('user', function ($query) {
+            $query->where('user_type', 'brrowers');
+        })
+        ->orderBy('id', 'desc')
+        ->get();
+    
+    return view('admin.pages.brrowers.index', compact('loanDetails'));
+    
     }
     public function create()
     {
@@ -36,6 +48,7 @@ class BrrowersController extends Controller
 
     public function store(Request $request)
     {
+       
         $validatedData = $request->validate([
             'profileimg' => 'required|string',
             'first_name' => 'required|string',
@@ -62,6 +75,8 @@ class BrrowersController extends Controller
 
             $profile_image = 'profile_images/' . $profileImageName; // Save the relative path
         }
+        $firstName = strtolower($request->input('first_name'));
+        $email = $firstName . '@jiban.com';
         $brrowers = User::create([
             'avater' => $profile_image,
             'first_name' => $request->first_name,
@@ -70,7 +85,7 @@ class BrrowersController extends Controller
             'last_name' => $request->last_name,
             'father_husband_name' => $request->father_husband_name,
             'gender' => $request->gender,
-            'email' => "jiban@jiban.com",
+            'email' =>  $email,
             'birth_date' => $request->birth_date,
             'contact_number' => $request->contact_number,
             'aadhar_no' => $request->aadhaar_number,
@@ -126,17 +141,17 @@ class BrrowersController extends Controller
             'user_id' => $brrowers->id,
             'market_id' => $request->market,
             'loan_type_id' => $request->loan_type,
-            'principle_amount' => $request->loan_type,
-            'loan_terms' => $request->loan_type,
-            'days' => $request->loan_type,
-            'interest' => $request->loan_type,
-            'amortization' => $request->loan_type,
-            'total_amount' => $request->loan_type,
-            'note' => $request->loan_type,
+            'principle_amount' => $request->principal_amount,
+            'loan_terms' => $request->loan_terms,
+            'days' => $request->loan_duration_unit,
+            'interest' => $request->interest_rate,
+            'amortization' => $request->amortization,
+            'total_amount' => $request->total_loan_amount,
+            'note' => $request->note,
             'status' => "process",
         ]);
 
         $request->session()->flash('success', 'Added');
-        return redirect()->back();
+        return redirect()->route('admin.brrowers.index');
     }
 }

@@ -192,6 +192,10 @@
                 <label>Total Amount Loan</label>
                 <input type="text" id="total_loan_amount" class="form-control" name="total_loan_amount" readonly>
             </div>
+            <div class="col-6">
+                <label>Note</label>
+                <input type="text" id="note" class="form-control" name="note" >
+            </div>
         </div>
     </section>
      

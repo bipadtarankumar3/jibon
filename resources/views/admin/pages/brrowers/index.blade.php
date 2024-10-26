@@ -21,44 +21,25 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($brrowers as $brrower)
+                @foreach ($loanDetails as $loanDetail)
                     <tr>
-                        <td>{{ $brrower->first_name }} {{ $brrower->last_name }}</td>
-                        <td>{{ $brrower->contact_number }}</td>
-                        <td>{{ $brrower->created_at->format('d/m/Y') }}</td>
-                        <td>
-                            @php
-                                // Fetch the loan amount for the first loan detail if exists
-                                $loanDetail = $brrower->loanDetails->first();
-                                $loanAmount = $loanDetail ? $loanDetail->principle_amount : 'N/A';
-                            @endphp
-                            {{ $loanAmount }}
-                        </td>
-                        <td>
-                            @php
-                                // Fetch the market name using the relationship safely
-                                $marketName = $loanDetail && $loanDetail->market ? $loanDetail->market->market_name : 'N/A';
-                            @endphp
-                            {{ $marketName }}
-                        </td>
-                        <td>
-                            @php
-                                // Check status based on loan details or other logic
-                                $status = $loanDetail ? $loanDetail->status : 'N/A';
-                            @endphp
-                            {{ $status }}
-                        </td>
+                        <td>{{ $loanDetail->user->first_name ?? 'N/A' }} {{ $loanDetail->user->last_name ?? '' }}</td>
+                        <td>{{ $loanDetail->user->contact_number ?? 'N/A' }}</td>
+                        <td>{{ $loanDetail->created_at->format('d/m/Y') }}</td>
+                        <td>{{ $loanDetail->principle_amount ?? 'N/A' }}</td>
+                        <td>{{ $loanDetail->market->market_name ?? 'N/A' }}</td>
+                        <td>{{ $loanDetail->status ?? 'N/A' }}</td>
                         <td>
                             <ul class="actn">
                                 <li><a href="#"><span class="material-symbols-outlined">edit</span></a></li>
                                 <li><a href="#"><span class="material-symbols-outlined">check_circle</span></a></li>
                                 <li>
                                     <a href="#" 
-                                       onclick="event.preventDefault(); document.getElementById('delete-form-{{ $brrower->id }}').submit();">
+                                       onclick="event.preventDefault(); document.getElementById('delete-form-{{ $loanDetail->id }}').submit();">
                                        <span class="material-symbols-outlined">delete</span>
                                     </a>
                                 </li>
-                                <form id="delete-form-{{ $brrower->id }}" action="#" method="POST" style="display: none;">
+                                <form id="delete-form-{{ $loanDetail->id }}" action="#" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
                                 </form>
