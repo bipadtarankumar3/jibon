@@ -16,10 +16,23 @@ return new class extends Migration
             $table->string('username');
             $table->string('name');
             $table->string('first_name')->nullable();
+            $table->string('middle_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('name');
             $table->string('email')->unique();
             $table->string('user_type')->nullable();
+
+            $table->string('father_husband_name')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('birth_date')->nullable();
+            $table->string('contact_number')->nullable();
+            $table->string('aadhar_no')->nullable();
+            $table->string('pan_no')->nullable();
+            $table->string('voter_card_no')->nullable();
+            $table->text('occupation')->nullable();
+            $table->text('occupation_address')->nullable();
+            $table->text('occupation_remarks')->nullable();
+            $table->text('remarks')->nullable();
+            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->text('avater');

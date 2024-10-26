@@ -19,29 +19,29 @@ $(document).ready(function(){
 let stream; // To store the camera stream
 
 // Open Camera button
-document.getElementById('openCameraButton').addEventListener('click', function() {
-  // Request access to the front camera
-  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
-    .then(function(cameraStream) {
-      // Save the stream to stop later
-      stream = cameraStream;
+// document.getElementById('openCameraButton').addEventListener('click', function() {
+//   // Request access to the front camera
+//   navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
+//     .then(function(cameraStream) {
+//       // Save the stream to stop later
+//       stream = cameraStream;
 
-      // Attach the camera stream to the video element
-      const video = document.getElementById('camera');
-      video.srcObject = stream;
+//       // Attach the camera stream to the video element
+//       const video = document.getElementById('camera');
+//       video.srcObject = stream;
 
-      // Show the video and capture/cancel buttons
-      video.style.display = 'block';
-      document.getElementById('captureButton').style.display = 'inline';
-      document.getElementById('cancelCameraButton').style.display = 'inline';
+//       // Show the video and capture/cancel buttons
+//       video.style.display = 'block';
+//       document.getElementById('captureButton').style.display = 'inline';
+//       document.getElementById('cancelCameraButton').style.display = 'inline';
 
-      // Hide the open camera button
-      document.getElementById('openCameraButton').style.display = 'none';
-    })
-    .catch(function(err) {
-      console.error("Error accessing the camera: ", err);
-    });
-});
+//       // Hide the open camera button
+//       document.getElementById('openCameraButton').style.display = 'none';
+//     })
+//     .catch(function(err) {
+//       console.error("Error accessing the camera: ", err);
+//     });
+// });
 
 // Capture button
 document.getElementById('captureButton').addEventListener('click', function() {
