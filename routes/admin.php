@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\LoanTypeController;
 use App\Http\Controllers\admin\UserManagementController;
 use App\Http\Controllers\admin\LoanController;
 use App\Http\Controllers\admin\TransactionController;
+use App\Http\Controllers\admin\ReportController;
 
 Route::get('admin/login', [AdminAuthController::class, 'login'])->name('login');
 Route::post('admin-login-action', [AdminAuthController::class, 'adminLoginAction']);
@@ -55,10 +56,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
 
 
     Route::get('loans', [LoanController::class,'loans']);
+
     Route::get('transactions', [TransactionController::class,'transactions']);
     Route::get('set_transaction', [TransactionController::class,'set_transaction']);
+    Route::post('add_transaction', [TransactionController::class,'add_transaction'])->name('transactions.store');
 
-   
+    Route::get('reports', [ReportController::class,'reports']);
 
     // Route::group(['prefix' => 'payout', 'as' => 'payout.'], function () {
     //     Route::get('list', [PayoutManagementController::class, 'payoutList']);

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('market_id');
             $table->date('emi_date')->nullable();
             $table->float('emi_amount')->nullable();
-            $table->float('remaing_amount')->nullable();
+            $table->float('remaining_amount')->nullable();
             $table->string('status')->default('due');
             $table->timestamps();
             $table->softDeletes();

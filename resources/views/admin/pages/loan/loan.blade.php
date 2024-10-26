@@ -32,11 +32,14 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Full Name</th>
-                    <th>Contact Number</th>
-                    <th>Date</th>
+                    <th>Loan ID</th>
+                    <th>Name</th>
                     <th>Loan Amount</th>
+                    <th>Loan Type</th>
+                    <th>Date Started</th>
+                    <th>Maturity Date</th>
                     <th>Market</th>
+                    <th>Total Amount</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -44,11 +47,15 @@
             <tbody>
                 @foreach ($loanDetails as $loanDetail)
                     <tr>
+                        <td>{{ $loanDetail->loan_unique_id }}</td>
                         <td>{{ $loanDetail->user->first_name ?? 'N/A' }} {{ $loanDetail->user->last_name ?? '' }}</td>
-                        <td>{{ $loanDetail->user->contact_number ?? 'N/A' }}</td>
+                        <td>{{ $loanDetail->total_amount ?? 'N/A' }}</td>
+                        <td>{{ $loanDetail->loan_type->type_name ?? 'N/A' }}</td>
                         <td>{{ $loanDetail->created_at->format('d/m/Y') }}</td>
-                        <td>{{ $loanDetail->principle_amount ?? 'N/A' }}</td>
+                        <td>{{ $loanDetail->maturity_date }}</td>
+                        
                         <td>{{ $loanDetail->market->market_name ?? 'N/A' }}</td>
+                        <td>{{ $loanDetail->total_amount ?? 'N/A' }}</td>
                         <td>{{ $loanDetail->status ?? 'N/A' }}</td>
                         <td>
                             <ul class="actn">

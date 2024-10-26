@@ -21,4 +21,9 @@ class BrrowersLoanDetails extends Model
     {
         return $this->belongsTo(Market::class, 'market_id');
     }
+
+    public function loan_type()
+    {
+        return $this->belongsTo(LoanType::class, 'loan_type_id');
+    }
 }

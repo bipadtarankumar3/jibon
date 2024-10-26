@@ -203,7 +203,7 @@ class BrrowersController extends Controller
         ]);
         $loan_id = rand(000000000, 99999999);
         BrrowersLoanDetails::create([
-            'loan_id' => $loan_id,
+            'loan_unique_id' => $loan_id,
             'user_id' => $brrowers->id,
             'market_id' => $request->market,
             'loan_type_id' => $request->loan_type,
