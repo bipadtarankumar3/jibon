@@ -11,15 +11,15 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" type="{{URL::TO('public/assets/image/x-icon')}}" href="images/favicon.png" />
     <link rel="stylesheet" href="{{URL::TO('public/assets/css/bootstrap.min.css')}}" />
-    <link href="css/material-design-iconic-font.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{URL::TO('public/assets/css/material-design-iconic-font.min.css')}}" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" id="jqueryfancyboxmin-css-css"
-        href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css?ver=6.0.1" media="all" />
+        href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css?ver=6.0.1" media="all" />
     <link rel="stylesheet" href="{{URL::TO('public/assets/css/slick.css')}}" />
     <link rel="stylesheet" href="{{URL::TO('public/assets/css/slick-theme.css')}}" />
     <link rel="stylesheet" href="{{URL::TO('public/assets/css/aos.css')}}" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
     <link href="{{URL::TO('public/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
 </head>
 <!-- laravel CRUD token -->
@@ -140,17 +140,19 @@
     <!-- create indent modal end-->
     <span class="screen-darken"></span>
     <script src="{{URL::TO('public/assets/js/jquery-3.3.1.min.js')}}"></script>
-    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <!-- <script src="js/bootstrap.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js?ver=3.5.7" id="fancyboxmin-js-js">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js?ver=3.5.7" id="fancyboxmin-js-js">
     </script>
+        <script src="{{URL::TO('public/assets/js/jquery.steps.min.js')}}"></script>
     <script src="{{URL::TO('public/assets/js/slick.js')}}"></script>
-    <script src="{{URL::TO('public/assets/js/customScript.js')}}"></script>
+    
     <script src="{{URL::TO('public/assets/js/webcamjs/webcam.min.js')}}"></script>
+    <script src="{{URL::TO('public/assets/js/customScript.js')}}"></script>
     <script src="{{URL::TO('public/assets/js/custom.js')}}"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>

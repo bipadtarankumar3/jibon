@@ -8,7 +8,14 @@ $(document).ready(function () {
         jpeg_quality: 90
     });
 
+
+
     $('#open_cam').click(function () {
+        console.log('ddd');
+        Webcam.attach('#my_camera');
+    });
+    $('#open_cam_cust').click(function () {
+        console.log('ddd');
         Webcam.attach('#my_camera');
     });
     $('#open_cam1').click(function () {
