@@ -21,6 +21,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('user_type')->nullable();
 
+            
+            
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
             $table->string('father_husband_name')->nullable();
             $table->string('gender')->nullable();
             $table->date('birth_date')->nullable();
@@ -32,9 +36,6 @@ return new class extends Migration
             $table->text('occupation_address')->nullable();
             $table->text('occupation_remarks')->nullable();
             $table->text('remarks')->nullable();
-            
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
             $table->text('avater');
             $table->text('avater_file');
             $table->text('address');

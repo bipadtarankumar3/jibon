@@ -54,7 +54,7 @@
         <main class="site-main">
             <div class="main_hldr">
                 @include('admin.layouts.sidebar')
-                @include('admin.layouts.validation')
+              
 
 
                 @yield('content')
@@ -163,6 +163,7 @@
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    @include('admin.layouts.validation')
     <script>
         $('#zero_config').DataTable({
             dom: 'Bfrtip',
