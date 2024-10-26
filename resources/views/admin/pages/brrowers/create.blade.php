@@ -162,6 +162,7 @@
             <div class="col-12">
                 <label>Loan Types</label>
                 <select class="form-select" name="loan_type" onchange="getLoanType(this.value)">
+                  <option value="">Select</option>
                     @foreach ($loan_types as $loan_type)
                     <option value="{{$loan_type->id}}">{{$loan_type->type_name}}</option>
                     @endforeach
@@ -240,23 +241,31 @@ function calculateLoan() {
     const interestRate = parseFloat(document.getElementById('interest_rate').value) || 0;
     const loanDurationUnit = document.getElementById('loan_duration_unit').value.toLowerCase();
 
-    // Calculate the interest as a decimal
-    const interestDecimal = interestRate / 100;
 
-    // Calculate Total Amount Loan (principal + total interest over the term)
-    const totalLoanAmount = principalAmount + (principalAmount * interestDecimal * loanTerms);
+// Calculate the interest based on the principal amount and interest rate
+const interestAmount = principalAmount * (interestRate / 100);
 
-    // Calculate Amortization based on days or months
-    let amortization = 0;
-    if (loanDurationUnit === 'month') {
-        amortization = totalLoanAmount / loanTerms; // Monthly amortization
-    } else if (loanDurationUnit === 'day') {
-        amortization = totalLoanAmount / (loanTerms * 30); // Daily amortization, assuming 30 days per month
-    }
+console.log("Interest Amount:", interestAmount);
+
+var totalAmount = principalAmount + parseFloat(interestAmount);
+
+    // // Calculate the interest as a decimal
+    // const interestDecimal = interestRate / 100;
+
+    // // Calculate Total Amount Loan (principal + total interest over the term)
+    // const totalLoanAmount = principalAmount + (principalAmount * interestDecimal * loanTerms);
+
+    // // Calculate Amortization based on days or months
+    // let amortization = 0;
+    // if (loanDurationUnit === 'month') {
+    //     amortization = totalLoanAmount / loanTerms; // Monthly amortization
+    // } else if (loanDurationUnit === 'day') {
+    //     amortization = totalLoanAmount / (loanTerms * 30); // Daily amortization, assuming 30 days per month
+    // }
 
     // Set calculated values in the form
-    document.getElementById('total_loan_amount').value = totalLoanAmount.toFixed(2);
-    document.getElementById('amortization').value = totalLoanAmount.toFixed(2);
+    document.getElementById('total_loan_amount').value = totalAmount.toFixed(2);
+    document.getElementById('amortization').value = totalAmount.toFixed(2);
 }
 
     </script>

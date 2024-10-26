@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('brrowers_loan_details', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('loan_id');
+            $table->integer('market_id');
             $table->integer('loan_type_id');
             $table->string('principle_amount')->nullable();
             $table->string('loan_terms')->nullable();
@@ -22,7 +24,9 @@ return new class extends Migration
             $table->string('amortization')->nullable();
             $table->string('total_amount')->nullable();
             $table->string('note')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
