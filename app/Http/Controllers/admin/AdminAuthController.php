@@ -42,6 +42,13 @@ class AdminAuthController extends Controller
     public function profile(){
         return view('admin.auth.profile');
     }
+    public function my_wallet(){
+        return view('admin.auth.my_wallet');
+    }
+
+    public function add_market(){
+        return view('admin.pages.market.add_market');
+    }
     public function logout(Request $request){
         Auth::logout();
 
