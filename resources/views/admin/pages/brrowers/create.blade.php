@@ -164,7 +164,7 @@
             
             <select class="form-select" name="loan_type">
                 @foreach ($loan_types as $loan_type)
-                <option value="{{$loan_type->id}}">{{$loan_type->loan_type}}</option>
+                <option value="{{$loan_type->id}}">{{$loan_type->type_name}}</option>
                 @endforeach
               
               
