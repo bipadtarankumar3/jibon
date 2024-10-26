@@ -10,7 +10,7 @@ use App\Http\Controllers\admin\UserManagementController;
 use App\Http\Controllers\admin\LoanController;
 use App\Http\Controllers\admin\TransactionController;
 
-Route::get('login', [AdminAuthController::class, 'login'])->name('login');
+Route::get('admin/login', [AdminAuthController::class, 'login'])->name('login');
 Route::post('admin-login-action', [AdminAuthController::class, 'adminLoginAction']);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\Middleware\AdminAuth']], function () {
@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::get('brrowers.create', [BrrowersController::class, 'create'])->name('brrowers.create');
     Route::get('loantypedetails', [BrrowersController::class, 'loantypedetails'])->name('loantypedetails');
     Route::post('brrowers.store', [BrrowersController::class, 'store'])->name('brrowers.store');
+    Route::post('brrowers.approve', [BrrowersController::class, 'approve'])->name('brrowers.approve');
     Route::get('my_wallet', [WalletController::class, 'index'])->name('wallets.index');
     Route::post('wallets', [WalletController::class, 'store'])->name('wallets.store');
     Route::get('wallets/{wallet}/edit', [WalletController::class, 'edit'])->name('wallets.edit');
