@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{URL::TO('admin/add_market')}}">
+                    <a href="{{URL::TO('admin/markets')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="loan_type.html">
+                    <a href="{{URL::TO('admin/loan_types')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
@@ -139,7 +139,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="users.html">
+                    <a href="{{URL::TO('admin/users')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
