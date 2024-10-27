@@ -107,7 +107,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="full_payment.html">
+                    <a href="{{route('admin.final_paid')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
@@ -117,7 +117,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="drop_out.html">
+                    <a href="{{route('admin.drop_out')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path

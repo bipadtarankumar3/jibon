@@ -27,6 +27,8 @@ return new class extends Migration
             $table->date('maturity_date')->nullable();
             $table->text('note')->nullable();
             $table->string('status')->nullable();
+            $table->string('final_paid')->nullable();
+            $table->string('drop_out')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

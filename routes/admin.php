@@ -23,11 +23,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
 
     // Wallet Routes
     Route::get('demand_sheet/index', [DemandSheetController::class, 'index'])->name('demand_sheet.index');
-    Route::get('brrowers.index', [BrrowersController::class, 'index'])->name('brrowers.index');
-    Route::get('brrowers.create', [BrrowersController::class, 'create'])->name('brrowers.create');
+    Route::get('brrowers/index', [BrrowersController::class, 'index'])->name('brrowers.index');
+    Route::get('brrowers/create', [BrrowersController::class, 'create'])->name('brrowers.create');
     Route::get('loantypedetails', [BrrowersController::class, 'loantypedetails'])->name('loantypedetails');
-    Route::post('brrowers.store', [BrrowersController::class, 'store'])->name('brrowers.store');
-    Route::post('brrowers.approve', [BrrowersController::class, 'approve'])->name('brrowers.approve');
+    Route::post('brrowers/store', [BrrowersController::class, 'store'])->name('brrowers.store');
+    Route::post('brrowers/approve', [BrrowersController::class, 'approve'])->name('brrowers.approve');
     Route::get('my_wallet', [WalletController::class, 'index'])->name('wallets.index');
     Route::post('wallets', [WalletController::class, 'store'])->name('wallets.store');
     Route::get('wallets/{wallet}/edit', [WalletController::class, 'edit'])->name('wallets.edit');
@@ -56,6 +56,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
 
 
     Route::get('loans', [LoanController::class,'loans']);
+    Route::get('/final_paid', [TransactionController::class, 'final_paid'])->name('final_paid');
+    Route::get('/drop_out', [TransactionController::class, 'drop_out'])->name('drop_out');
 
     Route::get('transactions', [TransactionController::class,'transactions']);
     Route::get('set_transaction', [TransactionController::class,'set_transaction']);
