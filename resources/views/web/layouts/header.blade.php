@@ -4,7 +4,7 @@
                 <div class="top_header">
 
                     <div class="logo">
-                        <a href="index.html">
+                        <a href="{{URL::TO('/')}}">
                         <img src="{{URL::TO('public/assets/images/logo.png')}}" alt="">
                     </a>
                     </div>
@@ -25,16 +25,16 @@
         <div class="collapse navbar-collapse" id="navbarText">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a href="index.html">Home </a>
+              <a href="{{URL::TO('/')}}">Home </a>
             </li>
             <li class="nav-item">
-              <a href="about.html">About Us</a>
+              <a href="{{URL::TO('about-us')}}">About Us</a>
             </li>
             <li class="nav-item">
-              <a href="services.html">Services</a>
+              <a href="{{URL::TO('services')}}">Services</a>
             </li>
             <li class="nav-item">
-                <a href="contact.html">Contact</a>
+                <a href="{{URL::TO('contact-us')}}">Contact</a>
               </li>
               <li class="nav-item">
                 <a href="{{URL::TO('admin/login')}}">Admin</a>

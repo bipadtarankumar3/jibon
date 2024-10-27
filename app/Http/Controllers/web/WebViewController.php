@@ -36,160 +36,25 @@ class WebViewController extends Controller
         return view('web.pages.index');
     }
 
-    public function toursPage(Request $request)
+    public function aboutUs(Request $request)
     {
-        // dd($request->all());
-        Session::put('traveler',$request->traveler);
-        $data['experianceCategory'] = experianceCategory::orderBy('id', 'desc')->get();
-        $data['locations'] = Location::orderBy('id', 'desc')->get();
-        $data['travel_style'] = experianceAttribute::where('attribute_type', 'travel_style')->orderBy('id', 'desc')->get();
-        $data['facilities'] = experianceAttribute::where('attribute_type', 'facilities')->orderBy('id', 'desc')->get();
-        $data['tour_feature'] = experianceAttribute::where('attribute_type', 'travel_style')->orderBy('id', 'desc')->get();
+       
     
-        $tourQuery = ExpriencePackage::query();
-    
-        // Filter by search date range and availability status
-        if ($request->has('search_date') && !empty($request->input('search_date'))) {
-            $searchd = explode('-', $request->input('search_date'));
-            $from_date = date('Y-m-d', strtotime(trim($searchd[0])));
-            $to_date = date('Y-m-d', strtotime(trim($searchd[1])));
-    
-            $availableDays = ExpriencePackageAvailableDay::select('exprience_package_id')
-                ->whereBetween('exprience_package_available_date', [$from_date, $to_date])
-                ->where('exprience_package_available_status', 'available')
-                ->distinct()
-                ->pluck('exprience_package_id');
-    
-            $tourQuery->whereIn('id', $availableDays);
-        }
-    
-        // Filter by location
-        if ($request->has('location_id') && !empty($request->input('location_id'))) {
-            $tourQuery->where('location_id', $request->input('location_id'));
-        }
-    
-        // Filter by tour type (if applicable)
-        if ($request->has('category_id') && !empty($request->input('category_id'))) {
-            $tourQuery->where('category_id', $request->input('category_id'));
-        }
-    
-        // Filter by price range
-        if ($request->has('minPrice') && !empty($request->input('minPrice'))) {
-            $tourQuery->where('amount', '>=', $request->input('minPrice'));
-        }
-    
-        if ($request->has('maxPrice') && !empty($request->input('maxPrice'))) {
-            $tourQuery->where('amount', '<=', $request->input('maxPrice'));
-        }
-    
-        // Filter by travel style
-        if ($request->has('travel_style_id') && !empty($request->input('travel_style_id'))) {
-            $tourQuery->where('experiance_attribute_style_id', $request->input('travel_style_id'));
-        }
-    
-        // Filter by facilities
-        if ($request->has('facilitie_id') && !empty($request->input('facilitie_id'))) {
-            $tourQuery->where('experiance_attribute_facilities_id', $request->input('facilitie_id'));
-        }
-    
-        // Filter by tour feature
-        if ($request->has('feature_id') && !empty($request->input('feature_id'))) {
-            $tourQuery->where('experiance_attribute_features_id', $request->input('feature_id'));
-        }
-    
-        // Apply pagination (10 items per page)
-        $data['tours'] = $tourQuery->orderBy('id', 'desc')->paginate(10);
-    
-        return view('web.pages.tours', $data);
+        return view('web.pages.aboutUs');
     }
     
-    public function expriencesPage(Request $request){
+    public function services(Request $request){
       
         
-        // $data['tours']=Experiance::orderBy('id','desc')->get();
-
-
-        $data['experianceCategory'] = experianceCategory::orderBy('id', 'desc')->get();
-        $data['locations'] = Location::orderBy('id', 'desc')->get();
-        $data['travel_style'] = experianceAttribute::where('attribute_type', 'travel_style')->orderBy('id', 'desc')->get();
-        $data['facilities'] = experianceAttribute::where('attribute_type', 'facilities')->orderBy('id', 'desc')->get();
-        $data['tour_feature'] = experianceAttribute::where('attribute_type', 'travel_style')->orderBy('id', 'desc')->get();
-        
-        Session::put('traveler',$request->traveler);
-        $tourQuery = Experiance::query();
-    
-        // Filter by search date range and availability status
-        if ($request->has('search_date') && !empty($request->input('search_date'))) {
-            $searchd = explode('-', $request->input('search_date'));
-            $from_date = date('Y-m-d', strtotime(trim($searchd[0])));
-            $to_date = date('Y-m-d', strtotime(trim($searchd[1])));
-    
-            $availableDays = ExperianceAvailable::select('exp_experiance_id')
-                ->whereBetween('exp_available_date', [$from_date, $to_date])
-                ->where('exp_available_status', 'available')
-                ->distinct()
-                ->pluck('exp_experiance_id');
-    
-            $tourQuery->whereIn('id', $availableDays);
-        }
-    
-        // Filter by location
-        if ($request->has('location_id') && !empty($request->input('location_id'))) {
-            // dd($request->input('location_id'));
-            $tourQuery->where('location_id', $request->input('location_id'));
-        }
-    
-        // Filter by tour type (if applicable)
-        if ($request->has('category_id') && !empty($request->input('category_id'))) {
-            $tourQuery->where('category_id', $request->input('category_id'));
-        }
-    
-        // Filter by price range
-        if ($request->has('minPrice') && !empty($request->input('minPrice'))) {
-            $tourQuery->where('amount', '>=', $request->input('minPrice'));
-        }
-    
-        if ($request->has('maxPrice') && !empty($request->input('maxPrice'))) {
-            $tourQuery->where('amount', '<=', $request->input('maxPrice'));
-        }
-    
-        // Filter by travel style
-        if ($request->has('travel_style_id') && !empty($request->input('travel_style_id'))) {
-            $tourQuery->where('experiance_style_id', $request->input('travel_style_id'));
-        }
-    
-        // Filter by facilities
-        // if ($request->has('facilitie_id') && !empty($request->input('facilitie_id'))) {
-        //     $tourQuery->where('experiance_facilities_id', $request->input('facilitie_id'));
-        // }
-    
-        // Filter by tour feature
-        if ($request->has('feature_id') && !empty($request->input('feature_id'))) {
-            $tourQuery->where('experiance_features_id', $request->input('feature_id'));
-        }
-    
-        // Apply pagination (10 items per page)
-        $data['tours'] = $tourQuery->orderBy('id', 'desc')->paginate(10);
+       
 
         
-        return view('web.pages.expriences',$data);
+        return view('web.pages.services');
     }
-    public function tourDetails($id){
+    public function contactUs(){
       
         
-        $data['tour']=ExpriencePackage::where('id',$id)->first();
-        $data['tour_more_list']=ExpriencePackage::join('locations','locations.id','exprience_packages.location_id')
-        ->select('exprience_packages.*', 'locations.location_name')
-        ->whereNot('exprience_packages.id',$id)
-        ->get();
-        $data['ExpriencePackageDay']=ExpriencePackageDay::where('exprience_package_id',$id)->get();
-
-        $data['package_includeds'] = package_included::where('in_exprience_package_id', $id)->get();
-        $data['package_not_includeds'] = package_not_included::where('in_not_exprience_package_id', $id)->get();
-        $data['package_carry'] = package_carry::where('carry_exprience_package_id', $id)->get();
-        $data['package_faqs'] = package_faq::where('faq_exprience_package_id', $id)->get();
-        
-        return view('web.pages.toursDetails',$data);
+        return view('web.pages.contactUs');
     }
     public function exprienceDetails($id){
       
