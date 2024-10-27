@@ -61,8 +61,11 @@
             </div>
         </main>
     </div>
+
+
+
     <!-- Modal market-->
-    <div class="modal fade" id="createindent" tabindex="-1" aria-labelledby="createindent" aria-hidden="true">
+    <div class="modal fade" id="systemInfoModal" tabindex="-1" aria-labelledby="createindent" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -70,49 +73,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="common_form">
-                        <div class="row gy-3">
-                            <div class="col-6">
-                                <label>Business Name</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-6">
-                                <label>System Name</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-12">
-                                <label>Address</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-4">
-                                <label>Email Address</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-4">
-                                <label>Contact Number</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-4">
-                                <label>Currency</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="col-6">
-                                <label>Logo 1</label>
-                                <input type="file" class="form-control">
-                            </div>
-                            <div class="col-6">
-                                <label>Logo 2</label>
-                                <input type="file" class="form-control">
-                            </div>
-                            <div class="col-12 text-end">
-                                <input type="submit" value="update" class="btn btn-primary">
-                            </div>
-                        </div>
+                    <form class="common_form" id="systemInfoForm" enctype="multipart/form-data">
+                        
                     </form>
+                    
                 </div>
             </div>
         </div>
     </div>
+
+
+
     <div class="modal fade" id="restore" tabindex="-1" aria-labelledby="restore" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -228,6 +199,55 @@
                 return false;
             })
         }
+    </script>
+
+<script>
+
+
+    function showSystemInfo() {
+        $.ajax({
+                url: "{{URL::to('admin/system-info/show')}}",  // Endpoint to get the existing data
+                type: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'  // CSRF token for Laravel
+                },
+                success: function (data) {
+                   
+                    $('#systemInfoForm').html(data);
+                    $('#systemInfoModal').modal('show');
+                },
+                error: function (error) {
+                    console.log('Error fetching data:', error);
+                }
+            });
+    }
+
+
+    function saveSystemInfo () {
+        var formData = new FormData($('#systemInfoForm')[0]);  // Collect form data
+
+        $.ajax({
+            url: "{{URL::to('admin/system-info/save')}}",
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'  // CSRF token for Laravel
+            },
+            success: function (response) {
+                if (response.success) {
+                    alert('Data saved successfully!');
+                    $('#systemInfoModal').modal('hide');
+                } else {
+                    alert('Failed to save data.');
+                }
+            },
+            error: function (error) {
+                console.log('Error:', error);
+            }
+        });
+    }
     </script>
 
     @yield('js')

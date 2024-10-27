@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Hash;
 use Session;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use App\Models\BrrowersAddress;
+use App\Models\BrrowersLoanDetails;
+use App\Models\Documents;
+use App\Models\LoanType;
+use App\Models\Market;
+use App\Models\Emi;
+use App\Models\Wallet;
+use App\Models\Transaction;
+
 class AdminAuthController extends Controller
 {
     public function login(){
@@ -41,9 +50,45 @@ class AdminAuthController extends Controller
             return redirect()->back();
         }
     }
-    public function dashboard(){
-        return view('admin.pages.dashboard.dashboard');
+    public function dashboard()
+    {
+        // Existing data
+        $data['wallet'] = Wallet::sum('amount');
+        $data['brrowers'] = User::where('user_type', 'brrowers')->count();
+        $data['loans'] = BrrowersLoanDetails::count();
+        $data['outstanding'] = BrrowersLoanDetails::sum('total_amount');
+        $data['todayEmi'] = Emi::whereDate('emi_date', date('Y-m-d'))->sum('emi_amount');
+        $data['pendingEmi'] = Emi::where('status', 'due')->sum('emi_amount');
+
+        // Get start and end dates for the current week
+        $today = new \DateTime();
+        $dayOfWeek = $today->format('N'); // 1 (for Monday) through 7 (for Sunday)
+
+        $startOfWeek = (clone $today)->modify('-' . ($dayOfWeek - 1) . ' days')->format('Y-m-d');
+        $endOfWeek = (clone $today)->modify('+' . (7 - $dayOfWeek) . ' days')->format('Y-m-d');
+
+
+        // Weekly EMI and Pending EMI
+        $data['weeklyEmi'] = Transaction::whereBetween('created_at', [$startOfWeek, $endOfWeek])->sum('trans_emi_amount');
+
+        $data['weeklyPendingEmi'] = Emi::whereBetween('emi_date', [$startOfWeek, $endOfWeek])
+                                        ->where('status', 'due')
+                                        ->sum('emi_amount');
+
+        // Get start and end dates for the current month
+        $startOfMonth = $today->format('Y-m-01');
+        $endOfMonth = $today->format('Y-m-t'); // t gives the last day of the month
+
+        // Monthly EMI and Pending EMI
+        $data['monthlyEmi'] = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('trans_emi_amount');
+        
+        $data['monthlyPendingEmi'] = Emi::whereBetween('emi_date', [$startOfMonth, $endOfMonth])
+                                        ->where('status', 'due')
+                                        ->sum('emi_amount');
+
+        return view('admin.pages.dashboard.dashboard', $data);
     }
+
     public function profile(){
         return view('admin.auth.profile');
     }

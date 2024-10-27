@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\UserManagementController;
 use App\Http\Controllers\admin\LoanController;
 use App\Http\Controllers\admin\TransactionController;
 use App\Http\Controllers\admin\ReportController;
+use App\Http\Controllers\admin\SystemInfoController;
 
 Route::get('admin/login', [AdminAuthController::class, 'login'])->name('login');
 Route::get('admin/abcd', [AdminAuthController::class, 'login2'])->name('login');
@@ -69,12 +70,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::post('add_transaction', [TransactionController::class,'add_transaction'])->name('transactions.store');
 
     Route::get('reports', [ReportController::class,'reports']);
-
+    
     // Route::group(['prefix' => 'payout', 'as' => 'payout.'], function () {
     //     Route::get('list', [PayoutManagementController::class, 'payoutList']);
        
     // });
 
+    Route::get('/system-info/show', [SystemInfoController::class, 'show']);
+    Route::post('/system-info/save', [SystemInfoController::class, 'save']);
 
  
 });

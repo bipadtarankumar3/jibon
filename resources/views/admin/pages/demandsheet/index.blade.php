@@ -8,17 +8,20 @@
       <div class="row gy-4">
       <div class="col-12">
        <label>Market :</label>
-       <select class="form-select">
-        <option value="Bangalbari A">Bangalbari A</option>
+       <select class="form-select" name="market">
+        <option>Select Market</option>
+        @foreach($markets as $market)
+          <option value="{{$market->id}}" @if (isset($_GET['market']) && $_GET['market'] == $market->id) selected @endif>{{$market->market_name}}</option>
+        @endforeach
        </select>
         </div>
         <div class="col-6">
           <label>From</label>
-           <input type="date" class="form-control">
+           <input type="date" name="form_date" @if(isset($_GET['form_date'])) value="{{$_GET['form_date']}}" @endif class="form-control">
         </div>
         <div class="col-6">
           <label>To </label>
-           <input type="date" class="form-control">
+           <input type="date" name="to_date" @if(isset($_GET['to_date'])) value="{{$_GET['to_date']}}" @endif class="form-control">
         </div>
         <div class="col-12 text-end"> 
    
@@ -31,28 +34,50 @@
        <div class="mb-3">
         <a href="#url" class="common_btn">Print Table</a>
       </div>
-        <table class="table">
-          <thead>
-            <tr>
+      <table class="table">
+        <thead>
+          <tr>
             <th>Serial No.</th>
+            <th>Load Id</th>
             <th>Member Details</th>
             <th>Loan Date</th>
             <th>Loan Amount</th>
             <th>Loan Installment</th>
             <th>Due</th>
-            </tr>
-          </thead>
-          <tbody>
+          </tr>
+        </thead>
+        <tbody>
+          @php
+            $totalLoanAmount = 0;
+            $totalDueAmount = 0;
+          @endphp
+      
+          @foreach($results as $index => $result)
+            @php
+              $totalLoanAmount += $result->total_amount;
+              $totalDueAmount += $result->due_amount;
+            @endphp
             <tr>
-             <td>1</td>
-             <td>vdfvdf</td>
-             <td>20//7/23</td>
-             <td>2333</td>
-             <td>0.00</td>
-             <td>20//7/23</td>
+              <td>{{ $index + 1 }}</td>
+              <td>{{ $result->loan_unique_id }}</td>
+              <td>{{ $result->first_name }} {{ $result->last_name }}</td>
+              <td>{{ \Carbon\Carbon::parse($result->created_at)->format('d/m/Y') }}</td>
+              <td>{{ number_format($result->total_amount, 2) }}</td>
+              <td>{{ number_format($result->emi_paid, 2) }}</td>
+              <td>{{ number_format($result->due_amount, 2) }}</td>
             </tr>
-          </tbody>
-        </table>
+          @endforeach
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4" class="text-end">Grand Total</th>
+            <th>{{ number_format($totalLoanAmount, 2) }}</th>
+            <th></th>
+            <th>{{ number_format($totalDueAmount, 2) }}</th>
+          </tr>
+        </tfoot>
+      </table>
+      
       </div> 
 
       </div>

@@ -151,7 +151,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:(void)" data-bs-toggle="modal" data-bs-target="#createindent">
+                    <a href="javascript:(void)" onclick="showSystemInfo()" class="systemInfoBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
