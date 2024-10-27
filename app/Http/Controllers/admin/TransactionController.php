@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BrrowersLoanDetails;
 use App\Models\Emi;
+use App\Models\Loan;
 use App\Models\Transaction;
 
 use App\Models\Market;
@@ -96,6 +97,11 @@ class TransactionController extends Controller
                     'updated_at' => now(),
                 ]);
                 Emi::where('id',$value)->update(['status'=>'paid']);
+
+                if($emi->remaining_amount == 0){
+                    Loan::where('id',$emi->loan_id)->update(['final_paid'=>'Paid']);
+                }
+
             }
         }
 

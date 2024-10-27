@@ -26,9 +26,10 @@ return new class extends Migration
             $table->date('approve_date')->nullable();
             $table->date('maturity_date')->nullable();
             $table->text('note')->nullable();
-            $table->string('status')->nullable();
             $table->string('final_paid')->nullable();
             $table->string('drop_out')->nullable();
+            $table->string('status')->nullable();
+            
             $table->timestamps();
             $table->softDeletes();
         });

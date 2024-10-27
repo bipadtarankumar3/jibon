@@ -18,7 +18,7 @@
             <th>Due</th>
             <th>Status</th>
             <th>Market</th>
-            <th>Action</th>
+            {{-- <th>Action</th> --}}
             </tr>
           </thead>
           @php
@@ -44,7 +44,7 @@
             <td>0</td>
               <td><span class="paid">{{$final_pai->final_paid}}</span></td>
               <td>{{$final_pai->market->market_name}}</td>
-              <td>
+              {{-- <td>
                 <ul class="actn">
                   <li><a href="#url"><span class="material-symbols-outlined">
                     edit
@@ -53,7 +53,7 @@
                       delete
                       </span></a></li>
                 </ul>
-              </td>
+              </td> --}}
              
             </tr>
             @endforeach
@@ -62,7 +62,7 @@
                 <td><strong>{{ $grandTotalAmount }}</strong></td>
                 <td></td>
                 <td></td>
-                <td colspan="3"></td>
+                <td colspan="2"></td>
             </tr>
           </tbody>
         </table>
