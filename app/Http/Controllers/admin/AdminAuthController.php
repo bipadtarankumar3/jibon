@@ -17,6 +17,7 @@ use App\Models\LoanType;
 use App\Models\Market;
 use App\Models\Emi;
 use App\Models\Wallet;
+use App\Models\Transaction;
 
 class AdminAuthController extends Controller
 {
@@ -66,8 +67,10 @@ class AdminAuthController extends Controller
         $startOfWeek = (clone $today)->modify('-' . ($dayOfWeek - 1) . ' days')->format('Y-m-d');
         $endOfWeek = (clone $today)->modify('+' . (7 - $dayOfWeek) . ' days')->format('Y-m-d');
 
+
         // Weekly EMI and Pending EMI
-        $data['weeklyEmi'] = Emi::whereBetween('emi_date', [$startOfWeek, $endOfWeek])->sum('emi_amount');
+        $data['weeklyEmi'] = Transaction::whereBetween('created_at', [$startOfWeek, $endOfWeek])->sum('trans_emi_amount');
+
         $data['weeklyPendingEmi'] = Emi::whereBetween('emi_date', [$startOfWeek, $endOfWeek])
                                         ->where('status', 'due')
                                         ->sum('emi_amount');
@@ -77,7 +80,8 @@ class AdminAuthController extends Controller
         $endOfMonth = $today->format('Y-m-t'); // t gives the last day of the month
 
         // Monthly EMI and Pending EMI
-        $data['monthlyEmi'] = Emi::whereBetween('emi_date', [$startOfMonth, $endOfMonth])->sum('emi_amount');
+        $data['monthlyEmi'] = Transaction::whereBetween('created_at', [$startOfMonth, $endOfMonth])->sum('trans_emi_amount');
+        
         $data['monthlyPendingEmi'] = Emi::whereBetween('emi_date', [$startOfMonth, $endOfMonth])
                                         ->where('status', 'due')
                                         ->sum('emi_amount');
