@@ -8,10 +8,15 @@ use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Session;
-
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 class AdminAuthController extends Controller
 {
     public function login(){
+        return view('admin.Auth.login');
+    }
+    public function login2(){
+        dd('hi');
         return view('admin.Auth.login');
     }
     public function backToAdmin(){
@@ -42,9 +47,39 @@ class AdminAuthController extends Controller
     public function profile(){
         return view('admin.auth.profile');
     }
-    public function my_wallet(){
-       
+    public function backup_database()
+    {
+        $database = env('DB_DATABASE');
+        $username = env('DB_USERNAME');
+        $password = env('DB_PASSWORD');
+        $host = env('DB_HOST');
+        $filename = "backup-" . date('Y-m-d_H-i-s') . ".sql";
+        $path = public_path($filename);
+    
+        // Path to mysqldump on XAMPP (Windows)
+        $mysqldumpPath = 'C:\xampp\mysql\bin\mysqldump.exe';
+    
+        // Construct the mysqldump command
+        $command = "\"{$mysqldumpPath}\" --user={$username} --password={$password} --host={$host} {$database} > \"{$path}\"";
+    
+        // Execute the command and capture output and result code
+        $output = [];
+        $result = null;
+        exec($command, $output, $result);
+    
+        if ($result !== 0) {
+            return back()->with('error', 'Database backup failed.');
+        }
+    
+        // Set a success flash message
+        session()->flash('success', 'Database backup successful.');
+    
+        // Return the backup file as a downloadable response and delete after sending
+        return response()->download($path)->deleteFileAfterSend(true);
     }
+    
+    
+    
 
 
     public function logout(Request $request){

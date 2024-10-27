@@ -12,10 +12,13 @@ use App\Http\Controllers\admin\TransactionController;
 use App\Http\Controllers\admin\ReportController;
 
 Route::get('admin/login', [AdminAuthController::class, 'login'])->name('login');
+Route::get('admin/abcd', [AdminAuthController::class, 'login2'])->name('login');
+
 Route::post('admin-login-action', [AdminAuthController::class, 'adminLoginAction']);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\Middleware\AdminAuth']], function () {
     Route::get('dashboard', [AdminAuthController::class, 'dashboard']);
+    Route::get('backup_database', [AdminAuthController::class, 'backup_database'])->name('backup_database');
     Route::get('profile', [AdminAuthController::class, 'profile']);
     Route::put('profile/update', [AdminAuthController::class, 'updateProfile'])->name('profile.update');
     Route::put('password/update', [AdminAuthController::class, 'updatePassword'])->name('password.update');
@@ -28,6 +31,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::get('loantypedetails', [BrrowersController::class, 'loantypedetails'])->name('loantypedetails');
     Route::post('brrowers/store', [BrrowersController::class, 'store'])->name('brrowers.store');
     Route::post('brrowers/approve', [BrrowersController::class, 'approve'])->name('brrowers.approve');
+    Route::get('brrowers/destroy/{id}', [BrrowersController::class, 'destroy'])->name('brrowers.destroy');
+    Route::get('edit_brrower/{id}', [BrrowersController::class, 'edit_brrower'])->name('edit_brrower');
     Route::get('my_wallet', [WalletController::class, 'index'])->name('wallets.index');
     Route::post('wallets', [WalletController::class, 'store'])->name('wallets.store');
     Route::get('wallets/{wallet}/edit', [WalletController::class, 'edit'])->name('wallets.edit');

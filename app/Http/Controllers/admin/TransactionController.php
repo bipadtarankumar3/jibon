@@ -53,13 +53,13 @@ class TransactionController extends Controller
     public function drop_out(){
 
       
-        $final_paid = BrrowersLoanDetails::where('drop_out',"Drop Out")->with(['user', 'market']) // Eager load related models
+        $drop_out = BrrowersLoanDetails::where('drop_out',"Drop Out")->with(['user', 'market']) // Eager load related models
         ->whereHas('user', function ($query) {
             $query->where('user_type', 'brrowers');
         })
         ->orderBy('id', 'desc')
         ->get();
-        return view('admin.pages.transaction.drop_out',compact('final_paid'));
+        return view('admin.pages.transaction.drop_out',compact('drop_out'));
     }
 
 

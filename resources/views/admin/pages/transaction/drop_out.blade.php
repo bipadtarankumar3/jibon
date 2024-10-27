@@ -15,6 +15,7 @@
         <table class="table">
           <thead>
             <tr>
+            <th>#</th>
             <th>Loan ID</th>
             <th>Name</th>
             <th>Phone</th>
@@ -29,18 +30,22 @@
             </tr>
           </thead>
           <tbody>
+            @foreach ($drop_out as $key => $item)
+                
+            
             <tr>
-              <td>0</td>
-              <td>farhn</td>
-              <td>9800213454</td>
-              <td>2000</td>
-              <td>100</td>
-              <td>10</td>
-              <td>102</td>
-              <td><span class="dua">Due</span> <span class="paid">Paid</span></td>
-              <td>siliguri</td>
+              <td>{{ $key+1 }}</td>
+              <td>{{ $item->loan_unique_id }}</td>
                
-              <td>
+            <td>{{ $item->user->first_name ?? 'N/A' }} {{ $item->user->last_name ?? '' }}</td>
+            <td>{{$item->user->contact_numbe}}</td>
+            <td>{{$item->total_amount}}</td>
+            <td>{{$item->total_amount/$item->loan_terms}}</td>
+            <td>{{$item->total_amount-$item->principle_amount}}</td>
+            <td>0</td>
+              <td><span class="paid">{{$item->itemd}}</span></td>
+              <td>{{$item->market->market_name}}</td>
+              {{-- <td>
                 <ul class="actn">
                   <li><a href="#url"><span class="material-symbols-outlined">
                     edit
@@ -49,8 +54,11 @@
                       delete
                       </span></a></li>
                 </ul>
-              </td>
-          </tr>
+              </td> --}}
+             
+            </tr>
+            @endforeach
+            
           </tbody>
         </table>
       </div>
