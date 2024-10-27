@@ -121,30 +121,71 @@ class BrrowersController extends Controller
             'last_name' => 'required|string',
         ]);
 
-        if (preg_match('/^data:image\/(\w+);base64,/', $request->profileimg, $type)) {
-            $image = substr($request->profileimg, strpos($request->profileimg, ',') + 1);
-            $image = base64_decode($image);
+        // if (preg_match('/^data:image\/(\w+);base64,/', $request->profileimg, $type)) {
+        //     $image = substr($request->profileimg, strpos($request->profileimg, ',') + 1);
+        //     $image = base64_decode($image);
 
-            // Create a unique filename for the profile image
-            $profileImageName = uniqid() . '.jpg'; // Adjust file name and type as needed
-            $profileImagePath = public_path('profile_images/' . $profileImageName);
+        //     // Create a unique filename for the profile image
+        //     $profileImageName = uniqid() . '.jpg'; // Adjust file name and type as needed
+        //     $profileImagePath = public_path('profile_images/' . $profileImageName);
 
-            // Ensure the directory exists
-            if (!file_exists(public_path('profile_images'))) {
-                mkdir(public_path('profile_images'), 0755, true);
+        //     // Ensure the directory exists
+        //     if (!file_exists(public_path('profile_images'))) {
+        //         mkdir(public_path('profile_images'), 0755, true);
+        //     }
+
+        //     // Save the profile image
+        //     file_put_contents($profileImagePath, $image);
+
+        //     // Save the profile image path in the database
+
+        //     $profile_image = 'profile_images/' . $profileImageName; // Save the relative path
+        // }
+
+        // Process the Base64 image
+        if ($request->has('profileimg')) {
+            // Remove the "data:image/jpeg;base64," part if it exists
+            $base64Str = preg_replace('#^data:image/\w+;base64,#i', '', $request->profileimg);
+            
+            // Decode the Base64 string
+            $imageData = base64_decode($base64Str);
+        
+            // Generate a unique filename
+            $profileImgName = Str::uuid() . '.jpg'; // or .jpeg
+        
+            // Define the path where you want to save the image
+            $profileImgPath = public_path('images/profile_images/' . $profileImgName);
+        
+            // Check if the directory exists, if not, create it
+            $directoryPath = public_path('images/profile_images');
+            if (!File::exists($directoryPath)) {
+                File::makeDirectory($directoryPath, 0755, true); // Create the directory with proper permissions
             }
-
-            // Save the profile image
-            file_put_contents($profileImagePath, $image);
-
-            // Save the profile image path in the database
-
-            $profile_image = 'profile_images/' . $profileImageName; // Save the relative path
+        
+            // Save the image to the specified path
+            file_put_contents($profileImgPath, $imageData);
+        
+            // Save the path for later use
+            $avatarPath = '/images/profile_images/' . $profileImgName; // Adjust path as needed
         }
+
+        // dd($avatarPath);
+        $avatarFilePath = null;
+        // Handle the uploaded file if it exists
+        if ($request->hasFile('avater_file')) {
+            $thumbnail = $request->file('avater_file');
+            $thumbnailName = Str::uuid() . '_' . $thumbnail->getClientOriginalName(); // Unique filename
+            $avatarFilePath = '/images/avatar/' . $thumbnailName; // Adjust path as needed
+            $thumbnail->move(public_path('images/avatar'), $thumbnailName); // Save the uploaded file
+        }
+
+
+
         $firstName = strtolower($request->input('first_name'));
         $email = $firstName . '@jiban.com';
         $brrowers = User::create([
-            'avater' => $profile_image,
+            'avater' => $avatarPath,
+            'avater_file' => $avatarFilePath,
             'first_name' => $request->first_name,
             'user_type' => "brrowers",
             'middle_name' => $request->middle_name,
