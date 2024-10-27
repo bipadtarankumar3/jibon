@@ -12,7 +12,7 @@
         <a href="#url" class="common_btn">Print</a>
       </div>
       <div class="responsive-table">
-        <table class="table">
+        <table class="table" id="zero_config">
           <thead>
             <tr>
             <th>#</th>

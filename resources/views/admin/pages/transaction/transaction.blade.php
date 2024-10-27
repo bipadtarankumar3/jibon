@@ -27,7 +27,7 @@
       <div class="money_table">
         <form action="{{ route('admin.transactions.store') }}" method="POST">
           @csrf
-          <table class="table">
+          <table class="table" id="zero_config">
               <thead>
                   <tr>
                       <th>Loan ID</th>

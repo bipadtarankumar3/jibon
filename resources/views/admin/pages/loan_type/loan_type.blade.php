@@ -8,7 +8,7 @@
         <div class="text-end mb-3">
             <a class="common_btn" href="#" data-bs-toggle="modal" data-bs-target="#createLoanTypeModal">Create Loan Type</a>
         </div>
-        <table class="table">
+        <table class="table" id="zero_config">
             <thead>
                 <tr>
                     <th>Name</th>

@@ -5,7 +5,7 @@
 
     <div class="money_table">
      
-        <table class="table">
+      <table class="table" id="zero_config">
           <thead>
             <tr>
             <th>#</th>

@@ -8,7 +8,7 @@
         <div class="text-end mb-3">
             <a class="common_btn" href="{{ route('admin.brrowers.create') }}">Add Borrower</a>
         </div>
-        <table class="table">
+        <table class="table" id="zero_config">
             <thead>
                 <tr>
                     <th>Full Name</th>
