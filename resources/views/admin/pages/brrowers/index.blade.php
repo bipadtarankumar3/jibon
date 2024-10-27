@@ -31,7 +31,7 @@
                         <td>{{ $loanDetail->status ?? 'N/A' }}</td>
                         <td>
                             <ul class="actn">
-                                <li><a href="{{ URL::to('admin/edit/') }}"><span class="material-symbols-outlined">edit</span></a></li>
+                                <li><a href="{{ route('admin.edit_brrower', $loanDetail->id) }}"><span class="material-symbols-outlined">edit</span></a></li>
                                 <li>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#approveModal-{{ $loanDetail->id }}">
                                        <span class="material-symbols-outlined">check_circle</span>

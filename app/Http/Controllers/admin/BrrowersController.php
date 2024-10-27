@@ -12,7 +12,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 class BrrowersController extends Controller
 {
     // public function index()
@@ -271,5 +272,120 @@ class BrrowersController extends Controller
 
         $request->session()->flash('success', 'Added');
         return redirect()->route('admin.brrowers.index');
+    }public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'profileimg' => 'nullable|string',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+        ]);
+    
+        // Find the existing user by ID
+        $user = User::findOrFail($id);
+    
+        // Process the Base64 image for profile if provided
+        if ($request->has('profileimg') && !empty($request->profileimg)) {
+            $base64Str = preg_replace('#^data:image/\w+;base64,#i', '', $request->profileimg);
+            $imageData = base64_decode($base64Str);
+            $profileImgName = Str::uuid() . '.jpg';
+            $profileImgPath = public_path('images/profile_images/' . $profileImgName);
+    
+            if (!File::exists(public_path('images/profile_images'))) {
+                File::makeDirectory(public_path('images/profile_images'), 0755, true);
+            }
+    
+            file_put_contents($profileImgPath, $imageData);
+            $avatarPath = '/images/profile_images/' . $profileImgName;
+            $user->avater = $avatarPath;
+        }
+    
+        // Process the avatar file if provided
+        if ($request->hasFile('avater_file') && !empty($request->avater_file)) {
+            $thumbnail = $request->file('avater_file');
+            $thumbnailName = Str::uuid() . '_' . $thumbnail->getClientOriginalName();
+            $avatarFilePath = '/images/avatar/' . $thumbnailName;
+            $thumbnail->move(public_path('images/avatar'), $thumbnailName);
+            $user->avater_file = $avatarFilePath;
+        }
+    
+        // Update basic user information
+        $firstName = strtolower($request->input('first_name'));
+        $email = $firstName . '@jiban.com';
+    
+        $user->update([
+            'first_name' => $request->first_name,
+            'middle_name' => $request->middle_name,
+            'last_name' => $request->last_name,
+            'father_husband_name' => $request->father_husband_name,
+            'gender' => $request->gender,
+            'email' => $email,
+            'birth_date' => $request->birth_date,
+            'contact_number' => $request->contact_number,
+            'aadhar_no' => $request->aadhaar_number,
+            'pan_no' => $request->pan_card_number,
+            'voter_card_no' => $request->voter_card_number,
+            'occupation' => $request->occupation,
+            'occupation_address' => $request->occupation_address,
+            'occupation_remarks' => $request->occupation_landmark,
+            'remarks' => $request->remarks,
+        ]);
+    
+        // Handle file attachments for the user
+        $documentData = [];
+        if ($request->has('attachment_file') && is_array($request->attachment_file)) {
+            foreach ($request->attachment_file as $file) {
+                if ($file && $file->isValid()) {
+                    $uploadName = round(microtime(true) * 1000) . "_" . str_replace(" ", "_", $file->getClientOriginalName());
+                    $file->move(public_path('upload'), $uploadName);
+    
+                    $documentData[] = [
+                        'image_name' => $uploadName,
+                        'table_name' => "brrowers",
+                        'item_id' => $user->id,
+                        'dcocument_type' => "attachment",
+                    ];
+                }
+            }
+    
+            if (!empty($documentData)) {
+                Documents::insert($documentData);
+            }
+        }
+    
+        // Update or create the address for the borrower
+        BrrowersAddress::updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'city' => $request->city_village,
+                'market' => $request->market,
+                'post_office' => $request->post_office,
+                'police_station' => $request->police_station,
+                'zip_code' => $request->zipcode,
+                'country' => $request->country,
+            ]
+        );
+    
+        // Update or create loan details for the borrower
+        $loan_id = rand(000000000, 99999999);
+        BrrowersLoanDetails::updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'loan_unique_id' => $loan_id,
+                'market_id' => $request->market,
+                'loan_type_id' => $request->loan_type,
+                'principle_amount' => $request->principal_amount,
+                'loan_terms' => $request->loan_terms,
+                'days' => $request->loan_duration_unit,
+                'interest' => $request->interest_rate,
+                'amortization' => $request->amortization,
+                'total_amount' => $request->total_loan_amount,
+                'note' => $request->note,
+                'status' => "process",
+            ]
+        );
+    
+        $request->session()->flash('success', 'Updated successfully');
+        return redirect()->route('admin.brrowers.index');
     }
+    
 }

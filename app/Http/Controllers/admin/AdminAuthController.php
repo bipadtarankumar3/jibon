@@ -24,10 +24,7 @@ class AdminAuthController extends Controller
     public function login(){
         return view('admin.Auth.login');
     }
-    public function login2(){
-        dd('hi');
-        return view('admin.Auth.login');
-    }
+    
     public function backToAdmin(){
        $user=User::where('email',Session::get('email'))->first();
        Auth::login($user);

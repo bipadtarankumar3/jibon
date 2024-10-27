@@ -23,7 +23,7 @@ class BrrowersLoanDetails extends Model
     }
     public function doucuments()
     {
-        return $this->hasOne(Documents::class, 'item_id','user_id');
+        return $this->hasMany(Documents::class, 'item_id','user_id');
     }
     public function address()
     {

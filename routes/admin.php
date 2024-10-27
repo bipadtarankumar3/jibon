@@ -13,7 +13,7 @@ use App\Http\Controllers\admin\ReportController;
 use App\Http\Controllers\admin\SystemInfoController;
 
 Route::get('admin/login', [AdminAuthController::class, 'login'])->name('login');
-Route::get('admin/abcd', [AdminAuthController::class, 'login2'])->name('login');
+
 
 Route::post('admin-login-action', [AdminAuthController::class, 'adminLoginAction']);
 
@@ -31,6 +31,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::get('brrowers/create', [BrrowersController::class, 'create'])->name('brrowers.create');
     Route::get('loantypedetails', [BrrowersController::class, 'loantypedetails'])->name('loantypedetails');
     Route::post('brrowers/store', [BrrowersController::class, 'store'])->name('brrowers.store');
+    Route::post('brrowers/update/{id}', [BrrowersController::class, 'update'])->name('brrowers.update');
     Route::post('brrowers/approve', [BrrowersController::class, 'approve'])->name('brrowers.approve');
     Route::get('brrowers/destroy/{id}', [BrrowersController::class, 'destroy'])->name('brrowers.destroy');
     Route::get('edit_brrower/{id}', [BrrowersController::class, 'edit_brrower'])->name('edit_brrower');
