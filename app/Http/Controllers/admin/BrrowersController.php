@@ -26,7 +26,7 @@ class BrrowersController extends Controller
     // }
     public function index()
     {
-        $loanDetails = BrrowersLoanDetails::with(['user', 'market']) // Eager load related models
+        $loanDetails = BrrowersLoanDetails::where('status', "process")->with(['user', 'market']) // Eager load related models
             ->whereHas('user', function ($query) {
                 $query->where('user_type', 'brrowers');
             })
@@ -41,6 +41,17 @@ class BrrowersController extends Controller
         $data['loan_types'] = LoanType::orderBy('id', 'desc')->get();
         return view('admin.pages.brrowers.create', $data);
     }
+    public function edit_brrower($id)
+    {
+        $data['market'] = Market::orderBy('id', 'desc')->get();
+        $data['loan_types'] = LoanType::orderBy('id', 'desc')->get();
+        $data['brrowers'] = BrrowersLoanDetails::with(['user', 'market', 'documents', 'address'])
+                                               ->where('user_id', $id)
+                                               ->firstOrFail();
+    
+        return view('admin.pages.brrowers.edit', $data);
+    }
+    
     public function loantypedetails(Request $request)
     {
         $loantype = LoanType::where('id', $request->loanTypeId)->first();
@@ -107,6 +118,15 @@ class BrrowersController extends Controller
 
         // Optionally, redirect back with a success message
         return redirect()->route('admin.brrowers.index')->with('success', 'Loan approved successfully!');
+    }
+
+    public function destroy($id){
+
+        BrrowersLoanDetails::where('id', $id)->update([
+            'drop_out'=>"Drop Out",
+            'status'=>"Drop Out",
+        ]);
+        return redirect()->back()->with('success', 'Loan details deleted successfully.');
     }
 
 

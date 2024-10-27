@@ -31,22 +31,16 @@
                         <td>{{ $loanDetail->status ?? 'N/A' }}</td>
                         <td>
                             <ul class="actn">
-                                <li><a href="#"><span class="material-symbols-outlined">edit</span></a></li>
+                                <li><a href="{{ route('admin.edit_brrower', $loanDetail->id) }}"><span class="material-symbols-outlined">edit</span></a></li>
                                 <li>
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#approveModal-{{ $loanDetail->id }}">
                                        <span class="material-symbols-outlined">check_circle</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#" 
-                                       onclick="event.preventDefault(); document.getElementById('delete-form-{{ $loanDetail->id }}').submit();">
-                                       <span class="material-symbols-outlined">delete</span>
-                                    </a>
+                                    <a href="{{ route('admin.brrowers.destroy', $loanDetail->id) }}"><span class="material-symbols-outlined">delete</span></a>
                                 </li>
-                                <form id="delete-form-{{ $loanDetail->id }}" action="#" method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
+                                
                             </ul>
                         </td>
                     </tr>
