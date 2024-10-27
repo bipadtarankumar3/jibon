@@ -12,7 +12,7 @@ class WalletController extends Controller
     {
         $wallets = Wallet::all();
        
-        return view('admin.auth.my_wallet',compact('wallets'));
+        return view('admin.Auth.my_wallet',compact('wallets'));
     }
 
     public function store(Request $request)
