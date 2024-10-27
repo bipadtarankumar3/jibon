@@ -21,6 +21,14 @@ class BrrowersLoanDetails extends Model
     {
         return $this->belongsTo(Market::class, 'market_id');
     }
+    public function doucuments()
+    {
+        return $this->hasOne(Documents::class, 'item_id','user_id');
+    }
+    public function address()
+    {
+        return $this->hasOne(BrrowersAddress::class, 'user_id','user_id');
+    }
 
     public function loan_type()
     {

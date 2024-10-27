@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
 
-@dd($brrowers)
+
 <div class="right_part">
     <h3 class="pageTitlw">Borrowers</h3>
     <form class="common_form" action="{{route('admin.brrowers.store')}}" method="post" enctype="multipart/form-data">
@@ -33,8 +33,11 @@
                     <input type="hidden" name="profileimg" id="avater">
                 </div>
 
+               
                 <div class="form-group mt-2">
                     <input type="file" class="form-control" name="avater_file" accept="image/*">
+                    @if($brrowers->user->avater_file)
+                    <img src="{{'public/'.$brrowers->user->avater_file'}}" height="100" width="100" alt="">
                 </div>
 
             </div>
@@ -55,65 +58,65 @@
           <div class="row gy-3">
             <div class="col-4">
               <label>First Name :</label>
-              <input type="text" class="form-control" name="first_name">
+              <input type="text" class="form-control" name="first_name" value="{{$brrowers->user->first_name}}">
             </div>
             <div class="col-4"> 
               <label>Middle Name (optional) :</label>
-              <input type="text" class="form-control" name="middle_name">
+              <input type="text" class="form-control" name="middle_name" value="{{$brrowers->user->middle_name}}">
             </div>
             <div class="col-4"> 
               <label>Last Name :</label>
-              <input type="text" class="form-control" name="last_name">
+              <input type="text" class="form-control" name="last_name" value="{{$brrowers->user->last_name}}">
             </div>
             <div class="col-12"> 
               <label>Father/Husband Name :</label>
-              <input type="text" class="form-control" name="father_husband_name">
+              <input type="text" class="form-control" name="father_husband_name" value="{{$brrowers->user->father_husband_name}}">
             </div>
             <div class="col-4"> 
               <label>Gender :</label>
               <select class="form-select" name="gender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="Male" @if($brrowers->user->gender == 'Male') selected @endif>Male</option>
+                <option value="Female" @if($brrowers->user->gender == 'Female') selected @endif>Female</option>
               </select>
             </div>
             <div class="col-4"> 
               <label>Birth Date :</label>
-              <input type="date" class="form-control" name="birth_date">
+              <input type="date" class="form-control" name="birth_date" value="{{$brrowers->user->birth_date}}">
             </div>
             <div class="col-4"> 
               <label>Contact Number :</label>
-              <input type="number" class="form-control" name="contact_number">
+              <input type="number" class="form-control" name="contact_number" value="{{$brrowers->user->contact_number}}">
             </div>
             <div class="col-12"> 
               <label>Aadhaar No. :</label>
-              <input type="number" class="form-control" name="aadhaar_number">
+              <input type="number" class="form-control" name="aadhaar_number" value="{{$brrowers->user->aadhar_no}}">
             </div>
             <div class="col-12"> 
               <label>Pan Card No. :</label>
-              <input type="text" class="form-control" name="pan_card_number">
+              <input type="text" class="form-control" name="pan_card_number" value="{{$brrowers->user->pan_no}}">
             </div>
             <div class="col-12"> 
               <label>Voter Card No. :</label>
-              <input type="text" class="form-control" name="voter_card_number">
+              <input type="text" class="form-control" name="voter_card_number" value="{{$brrowers->user->voter_card_no}}">
             </div>
 
             <div class="col-6"> 
               <label>Occupation (optional) :</label>
-              <input type="text" class="form-control" name="occupation">
+              <input type="text" class="form-control" name="occupation" value="{{$brrowers->user->occupation}}">
             </div>
             <div class="col-6"> 
               <label>Occupation Address (optional) :</label>
-              <input type="text" class="form-control" name="occupation_address">
+              <input type="text" class="form-control" name="occupation_address" value="{{$brrowers->user->occupation_address}}">
             </div>
 
             <div class="col-12"> 
               <label>Occupation Landmark (optional) :</label>
-              <input type="text" class="form-control" name="occupation_landmark">
+              <input type="text" class="form-control" name="occupation_landmark" value="{{$brrowers->user->occupation_remarks}}">
             </div>
 
             <div class="col-12"> 
               <label>Remarks (optional) :</label>
-              <textarea class="form-control" name="remarks"></textarea>
+              <textarea class="form-control" name="remarks">{!!$brrowers->user->remarks!!}</textarea>
             </div>
 
           </div>
@@ -126,13 +129,13 @@
         <div class="row gy-3">
           <div class="col-6">
             <label>City/Village :</label>
-            <input type="text" class="form-control" name="city_village">
+            <input type="text" class="form-control" name="city_village" value="{{$brrowers->address->city}}">
           </div>
           <div class="col-6"> 
             <label>Market :</label>
             <select class="form-select" name="market">
                 @foreach ($market as $m)
-                <option value="{{$m->id}}">{{$m->market_name}}</option>
+                <option value="{{$m->id}}" @if($brrowers->address->market == $m->id) selected @endif>{{$m->market_name}}</option>
                 @endforeach
               
               
@@ -140,19 +143,19 @@
           </div>
           <div class="col-6"> 
             <label>Post Office:</label>
-            <input type="text" class="form-control" name="post_office">
+            <input type="text" class="form-control" name="post_office" value="{{$brrowers->address->post_office}}">
           </div>
           <div class="col-6"> 
             <label>Police Station:</label>
-            <input type="text" class="form-control" name="police_station">
+            <input type="text" class="form-control" name="police_station" value="{{$brrowers->address->police_station}}">
           </div>
           <div class="col-6"> 
             <label>Zipcode :</label>
-            <input type="text" class="form-control" name="zipcode">
+            <input type="text" class="form-control" name="zipcode" value="{{$brrowers->address->zip_code}}">
           </div>
           <div class="col-6"> 
             <label>Country :</label>
-            <input type="text" class="form-control" name="country">
+            <input type="text" class="form-control" name="country"  value="{{$brrowers->address->country}}">
           </div>
         </div>
       </section>
@@ -165,37 +168,37 @@
                 <select class="form-select" name="loan_type" onchange="getLoanType(this.value)">
                   <option value="">Select</option>
                     @foreach ($loan_types as $loan_type)
-                    <option value="{{$loan_type->id}}">{{$loan_type->type_name}}</option>
+                    <option value="{{$loan_type->id}}" @if($brrowers->loan_type_id == $loan_type->id) selected @endif>{{$loan_type->type_name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-12">
                 <label>Principal Amount</label>
-                <input type="number" class="form-control" id="principal_amount" name="principal_amount" oninput="calculateLoan()">
+                <input type="number" class="form-control" id="principal_amount" name="principal_amount" value="{{$brrowers->principle_amount}}" oninput="calculateLoan()">
             </div>
             <div class="col-6">
                 <label>Loan Terms</label>
-                <input type="text" class="form-control" id="loan_terms" name="loan_terms" readonly>
+                <input type="text" class="form-control" id="loan_terms" name="loan_terms" value="{{$brrowers->loan_terms}}" readonly>
             </div>
             <div class="col-6">
                 <label>Select</label>
-                <input type="text" id="loan_duration_unit" class="form-control" name="loan_duration_unit" readonly>
+                <input type="text" id="loan_duration_unit" class="form-control" name="loan_duration_unit" value="{{$brrowers->days}}" readonly>
             </div>
             <div class="col-6">
                 <label>Interest (%)</label>
-                <input type="text" id="interest_rate" class="form-control" name="interest_rate" readonly>
+                <input type="text" id="interest_rate" class="form-control" name="interest_rate" value="{{$brrowers->interest}}" readonly>
             </div>
             <div class="col-6">
                 <label>Amortization</label>
-                <input type="text" id="amortization" class="form-control" name="amortization" readonly>
+                <input type="text" id="amortization" class="form-control" name="amortization" value="{{$brrowers->amortization}}" readonly>
             </div>
             <div class="col-6">
                 <label>Total Amount Loan</label>
-                <input type="text" id="total_loan_amount" class="form-control" name="total_loan_amount" readonly>
+                <input type="text" id="total_loan_amount" class="form-control" name="total_loan_amount" value="{{$brrowers->total_amount}}" readonly>
             </div>
             <div class="col-6">
                 <label>Note</label>
-                <input type="text" id="note" class="form-control" name="note" >
+                <input type="text" id="note" class="form-control" name="note" value="{{$brrowers->note}}x" >
             </div>
         </div>
     </section>

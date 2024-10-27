@@ -45,9 +45,9 @@ class BrrowersController extends Controller
     {
         $data['market'] = Market::orderBy('id', 'desc')->get();
         $data['loan_types'] = LoanType::orderBy('id', 'desc')->get();
-        $data['brrowers'] = BrrowersLoanDetails::with(['user', 'market', 'documents', 'address'])
-                                               ->where('user_id', $id)
-                                               ->firstOrFail();
+        $data['brrowers'] = BrrowersLoanDetails::where('id', $id)->with(['user', 'market','doucuments','address'])
+                                               
+                                               ->first();
     
         return view('admin.pages.brrowers.edit', $data);
     }
