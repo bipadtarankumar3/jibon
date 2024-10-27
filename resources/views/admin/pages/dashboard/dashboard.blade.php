@@ -8,7 +8,7 @@
                 <p>
                     Wallet
                     <br>
-                    ₹ -1260550
+                    ₹ {{ number_format($wallet, 2) }}
                 </p>
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <p>
                     Borrowers
                     <br>
-                    101
+                    {{ $brrowers }}
                 </p>
             </div>
         </div>
@@ -26,7 +26,7 @@
                 <p>
                     Loans
                     <br>
-                    101
+                    {{ $loans }}
                 </p>
             </div>
         </div>
@@ -35,25 +35,25 @@
                 <p>
                     Outstanding
                     <br>
-                    ₹ 1591750
+                    ₹ {{ number_format($outstanding, 2) }}
                 </p>
             </div>
         </div>
         <div class="col">
             <div class="coutn_box" style="background: #1de9b6;">
                 <p>
-                    Today Emi
+                    Today EMI
                     <br>
-                    ₹ 18950
+                    ₹ {{ number_format($todayEmi, 2) }}
                 </p>
             </div>
         </div>
         <div class="col">
             <div class="coutn_box" style="background: #31CE36;">
                 <p>
-                    Pending Emi
+                    Pending EMI
                     <br>
-                    ₹9400
+                    ₹ {{ number_format($pendingEmi, 2) }}
                 </p>
             </div>
         </div>
@@ -65,7 +65,7 @@
                     <p>
                         Weekly EMI
                         <br>
-                        129960
+                        ₹ {{ number_format($weeklyEmi, 2) }}
                     </p>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                     <p>
                         Weekly Pending
                         <br>
-                        129960
+                        ₹ {{ number_format($weeklyPendingEmi, 2) }}
                     </p>
                 </div>
             </div>
@@ -83,7 +83,7 @@
                     <p>
                         Monthly EMI
                         <br>
-                        129960
+                        ₹ {{ number_format($monthlyEmi, 2) }}
                     </p>
                 </div>
             </div>
@@ -92,7 +92,7 @@
                     <p>
                         Monthly Pending
                         <br>
-                        129960
+                        ₹ {{ number_format($monthlyPendingEmi, 2) }}
                     </p>
                 </div>
             </div>
