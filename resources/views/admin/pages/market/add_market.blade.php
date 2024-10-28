@@ -9,7 +9,7 @@
             <a class="common_btn" href="#" data-bs-toggle="modal" data-bs-target="#createMarketModal">Add Market</a>
         </div>
         
-        <table class="table">
+        <table class="table" id="zero_config">
             <thead>
                 <tr>
                     <th>Serial No.</th>

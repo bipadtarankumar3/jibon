@@ -34,7 +34,7 @@
        <div class="mb-3">
         <a href="#url" class="common_btn">Print Table</a>
       </div>
-      <table class="table">
+      <table class="table" id="zero_config">
         <thead>
           <tr>
             <th>Serial No.</th>

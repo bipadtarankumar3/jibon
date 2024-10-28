@@ -27,7 +27,7 @@
     <div class="money_table">
        
       <div class="responsive-table">
-        <table class="table">
+        <table class="table" id="zero_config">
           <thead>
             <tr>
             <th>Loan No</th>
