@@ -57,14 +57,23 @@
              
             </tr>
             @endforeach
-            <tr>
-                <td colspan="2"><strong>Grand Total:</strong></td>
-                <td><strong>{{ $grandTotalAmount }}</strong></td>
-                <td></td>
-                <td></td>
-                <td colspan="2"></td>
-            </tr>
+            
           </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+                <td ><strong>Grand Total:</strong></td>
+                <td><strong>{{ $grandTotalAmount }}</strong></td>
+              
+                <td></td>
+                <td ></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+          </tfoot>
         </table>
       </div> 
 

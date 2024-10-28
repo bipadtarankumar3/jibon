@@ -8,7 +8,7 @@
        <div class="text-end mb-3">
         <a class="common_btn" id="addMoneyButton" data-bs-toggle="modal" data-bs-target="#walletModal">Add Money</a>
       </div>
-        <table class="table">
+        <table class="table" id="zero_config">
           <thead>
             <tr>
               <th>Serial No.</th>

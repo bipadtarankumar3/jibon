@@ -202,7 +202,7 @@
     </div>
     <div class="d-flex justify-content-between">
       <button type="submit" class="btn btn-success">Save</button>
-      <button type="button" class="btn btn-secondary" onclick="closeForm()">Close</button>
+     
     </div>
   </form>
 </div>

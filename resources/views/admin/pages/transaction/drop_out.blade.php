@@ -5,14 +5,14 @@
 
 
     <div class="money_table">
-       <div class="mb-3">
+       {{-- <div class="mb-3">
         <a href="#url" class="common_btn">Copy</a>
         <a href="#url" class="common_btn">CSV</a>
         <a href="#url" class="common_btn">PDF</a>
         <a href="#url" class="common_btn">Print</a>
-      </div>
+      </div> --}}
       <div class="responsive-table">
-        <table class="table" id="zero_config">
+        <table class="table" id="dropout_table">
           <thead>
             <tr>
             <th>#</th>

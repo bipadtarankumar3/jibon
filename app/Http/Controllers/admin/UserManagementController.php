@@ -18,7 +18,7 @@ class UserManagementController extends Controller
     }
     public function index(){
         $data['title']='User Lists';
-        $data['users']=User::get();
+        $data['users']=User::where('user_type','!=','admin')->get();
         return view('admin.pages.user.list',$data);
     }
 

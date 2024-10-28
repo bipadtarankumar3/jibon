@@ -144,6 +144,51 @@
             ]
 
         });
+
+
+        $('#printDatatable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    footer: true // Include footer in Excel export
+                },
+                {
+                    extend: 'print',
+                    footer: true, // Include footer in print view
+                    customize: function (win) {
+                        $(win.document.body).css('font-size', '10pt');
+                        $(win.document.body).find('table').addClass('compact').css('font-size', 'inherit');
+                    }
+                }
+            ]
+        });
+
+
+        $('#dropout_table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excel',
+                    footer: true // Include footer in Excel export
+                },
+                {
+                    extend: 'csv',
+                    footer: true // Include footer in Excel export
+                },
+                {
+                    extend: 'print',
+                    footer: true, // Include footer in print view
+                    customize: function (win) {
+                        $(win.document.body).css('font-size', '10pt');
+                        $(win.document.body).find('table').addClass('compact').css('font-size', 'inherit');
+                    }
+                }
+            ]
+        });
+
+
+
         $('#report').DataTable({
             dom: 'Bfrtip',
             buttons: [

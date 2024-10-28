@@ -9,7 +9,7 @@
        <div class="mb-3 text-end">
         <a class="common_btn" href="{{ URL::to('admin/user_add') }}">Add User</a>
       </div>
-        <table class="table">
+        <table class="table" id="zero_config">
           <thead>
             <tr>
                 <th>Name</th>

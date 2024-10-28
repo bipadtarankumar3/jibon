@@ -31,10 +31,8 @@
     </form>
 
     <div class="money_table">
-       <div class="mb-3">
-        <a href="#url" class="common_btn">Print Table</a>
-      </div>
-      <table class="table" id="zero_config">
+       
+      <table class="table" id="printDatatable">
         <thead>
           <tr>
             <th>Serial No.</th>
@@ -70,7 +68,10 @@
         </tbody>
         <tfoot>
           <tr>
-            <th colspan="4" class="text-end">Grand Total</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th  class="text-end">Grand Total</th>
             <th>{{ number_format($totalLoanAmount, 2) }}</th>
             <th></th>
             <th>{{ number_format($totalDueAmount, 2) }}</th>
