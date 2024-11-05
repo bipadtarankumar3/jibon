@@ -51,6 +51,10 @@ class User extends Authenticatable
         return $this->hasMany(Documents::class, 'item_id');
     }
 
+    public function addressDetails()
+    {
+        return $this->hasOne(BrrowersAddress::class, 'user_id');
+    }
     public function address()
     {
         return $this->hasOne(BrrowersAddress::class, 'user_id');
