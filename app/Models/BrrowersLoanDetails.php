@@ -25,6 +25,15 @@ class BrrowersLoanDetails extends Model
     {
         return $this->hasMany(Documents::class, 'item_id','user_id');
     }
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class, 'trans_loan_id','id');
+    }
+
+    public function emi()
+    {
+        return $this->hasMany(Emi::class, 'loan_id','id');
+    }
     public function address()
     {
         return $this->hasOne(BrrowersAddress::class, 'user_id','user_id');

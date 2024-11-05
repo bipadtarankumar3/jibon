@@ -2260,6 +2260,63 @@ margin-right: 10px;
 .actions ul li:nth-child(2){
   margin-left: auto;
 }
+
+.loan_dtls_profil figure {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 10px;
+  border: 5px solid #97b8c7;
+}
+.loan_dtls_profil h5{
+   margin-bottom: 0;
+}
+.loan_dtls_profil figure img{width: 100%;height: 100%;object-fit: cover; }
+.loan_right , 
+.loan_dtls_profil {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+.loan_right h5, 
+.loan_dtls_profil h5 {
+  margin-bottom: 9px;
+  color: #000;
+}
+.loan_dtls_profil ul li {
+  color: #000;
+}
+.loan_dtls_profil ul li span {
+display: inline-block;
+padding: 5px;
+}
+.loan_right h5 
+{
+  margin-bottom: 20px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 18px;
+}
+.loan_right ul li{
+color: #000;
+margin-bottom: 5px;
+}
+.loan_right ul li p {
+  display: inline-block;
+  color: #6785c8;
+  font-weight: 500;
+  margin-left: 5px;
+}
+.loan_right ul li span {
+  background: #2666fa;
+  padding: 5px 10px;
+  color: #fff;
+  border-radius: 17px;
+}
+.accordion-button:focus {
+  box-shadow: inherit;
+}
 /* responsive */
 
 @media (max-width: 1500px) {
