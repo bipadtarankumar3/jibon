@@ -31,6 +31,7 @@ class BrrowersController extends Controller
         $loanDetails = BrrowersLoanDetails::with(['user', 'market']) // Eager load related models
             ->whereHas('user', function ($query) {
                 $query->where('user_type', 'brrowers');
+                $query->where('status', 'process');
             })
             ->orderBy('id', 'desc')
             ->get();

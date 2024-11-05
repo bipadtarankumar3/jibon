@@ -86,8 +86,8 @@
                         </span>
                     </a>
                 </li>
-                {{-- <li>
-                    <a href="daily-reports.html">
+                <li>
+                    <a href="{{URL::TO('admin/daily-reports')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                             fill="#e8eaed">
                             <path
@@ -95,7 +95,7 @@
                         </svg>
                         <span>Daily Reports</span>
                     </a>
-                </li> --}}
+                </li>
                 <li>
                     <a href="{{URL::TO('admin/loan_types')}}">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"

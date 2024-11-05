@@ -74,6 +74,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::post('add_transaction', [TransactionController::class,'add_transaction'])->name('transactions.store');
 
     Route::get('reports', [ReportController::class,'reports']);
+    Route::get('daily-reports', [ReportController::class,'dailyReports']);
     
     // Route::group(['prefix' => 'payout', 'as' => 'payout.'], function () {
     //     Route::get('list', [PayoutManagementController::class, 'payoutList']);
