@@ -47,8 +47,13 @@
             <tbody>
                 @foreach ($loanDetails as $loanDetail)
                     <tr>
-                        <td>{{ $loanDetail->loan_unique_id }}</td>
-                        <td>{{ $loanDetail->user->first_name ?? 'N/A' }} {{ $loanDetail->user->last_name ?? '' }}</td>
+                        <td>
+                            <a href="{{ URL::to('admin/loans_details', $loanDetail->id) }}">{{ $loanDetail->loan_unique_id }}</a></td>
+                        <td>
+                            <a href="{{ URL::to('admin/brrowers_details', $loanDetail->user_id) }}">
+                                {{ $loanDetail->user->first_name ?? 'N/A' }} {{ $loanDetail->user->last_name ?? '' }}
+                            </a>
+                        </td>
                         <td>{{ $loanDetail->total_amount ?? 'N/A' }}</td>
                         <td>{{ $loanDetail->loan_type->type_name ?? 'N/A' }}</td>
                         <td>{{ $loanDetail->created_at->format('d/m/Y') }}</td>

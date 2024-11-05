@@ -29,4 +29,23 @@ class LoanController extends Controller
 
         return view('admin.pages.loan.loan',$data);
     }
+    
+    public function loans_details($id)
+    {
+        $data['markets'] = Market::all();
+
+       $data['loanDetails'] = BrrowersLoanDetails::with(['user', 'market']) // Eager load related models
+            ->whereHas('user', function ($query) {
+                $query->where('user_type', 'brrowers');
+            });
+
+        if (isset($_GET['market'])) {
+            $data['loanDetails'] = $data['loanDetails']->where('market_id', $_GET['market']);
+        }
+
+        $data['loanDetails'] = $data['loanDetails']->orderBy('id', 'desc')->get();
+
+
+        return view('admin.pages.loan.loans_details',$data);
+    }
 }

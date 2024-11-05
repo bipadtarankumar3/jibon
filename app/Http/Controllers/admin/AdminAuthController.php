@@ -50,7 +50,7 @@ class AdminAuthController extends Controller
     public function dashboard()
     {
         // Existing data
-        $data['wallet'] = Wallet::sum('amount');
+        $data['wallet'] = BrrowersLoanDetails::sum('principle_amount');
         $data['brrowers'] = User::where('user_type', 'brrowers')->count();
         $data['loans'] = BrrowersLoanDetails::count();
         $data['outstanding'] = BrrowersLoanDetails::sum('total_amount');

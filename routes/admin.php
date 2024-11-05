@@ -34,6 +34,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
     Route::post('brrowers/update/{id}', [BrrowersController::class, 'update'])->name('brrowers.update');
     Route::post('brrowers/approve', [BrrowersController::class, 'approve'])->name('brrowers.approve');
     Route::get('brrowers/destroy/{id}', [BrrowersController::class, 'destroy'])->name('brrowers.destroy');
+    Route::get('brrowers_details/{id}', [BrrowersController::class,'brrowers_details']);
+
     Route::get('edit_brrower/{id}', [BrrowersController::class, 'edit_brrower'])->name('edit_brrower');
     Route::get('my_wallet', [WalletController::class, 'index'])->name('wallets.index');
     Route::post('wallets', [WalletController::class, 'store'])->name('wallets.store');
@@ -63,6 +65,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['App\Http\
 
 
     Route::get('loans', [LoanController::class,'loans']);
+    Route::get('loans_details/{id}', [LoanController::class,'loans_details']);
     Route::get('/final_paid', [TransactionController::class, 'final_paid'])->name('final_paid');
     Route::get('/drop_out', [TransactionController::class, 'drop_out'])->name('drop_out');
 
