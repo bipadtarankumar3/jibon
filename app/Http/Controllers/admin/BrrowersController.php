@@ -65,6 +65,11 @@ class BrrowersController extends Controller
     $data['loanDetails'] = BrrowersLoanDetails::where('user_id', $id)
         ->with(['transactions'])
         ->get();
+    $data['singleloanDetails'] = BrrowersLoanDetails::where('user_id', $id)
+    ->orderBy('id', 'desc')
+        ->with(['market'])
+        
+        ->first();
         return view('admin.pages.brrowers.brrowers_details', $data);
     }
 

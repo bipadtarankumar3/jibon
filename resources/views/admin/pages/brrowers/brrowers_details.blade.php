@@ -149,32 +149,32 @@
                                             Customer Id :
                                         </td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
-                                        class="name-box">
-                                        @foreach ($loanDetails as $key => $loanDetail)
-                                            @php
-                                                $loan_chars = str_split($loanDetail->loan_unique_id);
-                                            @endphp
-                                            @foreach ($loan_chars as $char)
-                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                    class="letter-box">{{ $char }}</div>
+                                            class="name-box">
+                                            @foreach ($loanDetails as $key => $loanDetail)
+                                                @php
+                                                    $loan_chars = str_split($loanDetail->loan_unique_id);
+                                                @endphp
+                                                @foreach ($loan_chars as $char)
+                                                    <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                        class="letter-box">{{ $char }}</div>
+                                                @endforeach
                                             @endforeach
-                                        @endforeach
-                                    </td>
-                                    
+                                        </td>
+
                                         <td>AGE</td>
-                                        @php 
-                                            $age =str_split( \Carbon\Carbon::parse($borrower->birth_date )->age);
+                                        @php
+                                            $age = str_split(\Carbon\Carbon::parse($borrower->birth_date)->age);
 
                                         @endphp
 
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                    @foreach ($age as $age_char)
-                                    <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                    class="letter-box">{{ $age_char }}</div>
-                                    @endforeach
-                                          
-                                           
+                                            @foreach ($age as $age_char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $age_char }}</div>
+                                            @endforeach
+
+
                                         </td>
                                         <td>years</td>
                                     </tr>
@@ -192,18 +192,18 @@
                                             @endphp
 
                                             @foreach ($name_chars as $name_char)
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">{{ $name_char }}</div>
-                                                @endforeach
-                                            
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $name_char }}</div>
+                                            @endforeach
+
                                             <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
                                                 class="letter-box"> </div>
 
                                             @foreach ($lst_name_chars as $lst_name_char)
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">{{ $lst_name_char }}</div>
-                                                @endforeach
-                                           
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $lst_name_char }}</div>
+                                            @endforeach
+
                                         </td>
 
                                     </tr>
@@ -216,13 +216,13 @@
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
                                             @php
-                                            $father_chars = str_split($borrower->father_husband_name);
+                                                $father_chars = str_split($borrower->father_husband_name);
                                             @endphp
                                             @foreach ($father_chars as $char)
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">{{ $char }}</div>
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
                                             @endforeach
-                                           
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -234,31 +234,35 @@
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">Vill
                                             @php
-                                            $vill_chars = str_split($borrower->addressDetails->city);
-                                            $post_office_chars = str_split($borrower->addressDetails->post_office);
-                                            $police_station_chars = str_split($borrower->addressDetails->police_station);
-                                            $police_station_chars = str_split($borrower->addressDetails->police_station);
-                                            $zip_code_chars = str_split($borrower->addressDetails->zip_code);
+                                                $vill_chars = str_split($borrower->addressDetails->city);
+                                                $post_office_chars = str_split($borrower->addressDetails->post_office);
+                                                $police_station_chars = str_split(
+                                                    $borrower->addressDetails->police_station,
+                                                );
+                                                $police_station_chars = str_split(
+                                                    $borrower->addressDetails->police_station,
+                                                );
+                                                $zip_code_chars = str_split($borrower->addressDetails->zip_code);
                                             @endphp
-                                            
+
                                             <div style="border-left: 1px solid black; display: inline-block;"></div>
                                             @foreach ($vill_chars as $char)
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">{{ $char }}</div>
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
                                             @endforeach
                                             P.O
                                             <div style="border-left: 1px solid black; display: inline-block;"></div>
                                             @foreach ($post_office_chars as $char)
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">{{ $char }}</div>
-                                                @endforeach
-                                             PS
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+                                            PS
                                             <div style="border-left: 1px solid black; display: inline-block;"></div>
                                             @foreach ($police_station_chars as $char)
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">{{ $char }}</div>
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
                                             @endforeach
-                                           
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -268,14 +272,14 @@
                                     <tr>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            Pin 
+                                            Pin
                                             <div style="border-left: 1px solid black; display: inline-block;"></div>
-                                           @foreach ($zip_code_chars as $char)
-                                           <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                           class="letter-box">{{$char}}</div>
-                                           @endforeach
-                                            
-                                            
+                                            @foreach ($zip_code_chars as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -283,7 +287,7 @@
                             <table>
                                 <tbody>
                                     @php
-                                                $occupation_char = str_split($borrower->occupation);
+                                        $occupation_char = str_split($borrower->occupation);
 
                                     @endphp
                                     <tr>
@@ -291,10 +295,10 @@
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
                                             @foreach ($occupation_char as $char)
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">{{$char}}</div>
-                                                @endforeach
-                                           
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+
                                         </td>
                                         <td>Gender :</td>
                                         <td>
@@ -311,57 +315,17 @@
                             <table>
                                 <tbody>
                                     <tr>
+                                        @php
+                                            $aadhar_char = str_split($borrower->aadhar_no);
+                                        @endphp
                                         <td>Aadhaar No :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">6</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">8</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">9</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">7</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">5</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">9</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">1</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">5</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">5</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">1</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">9</div>
-                                        </td>
-                                        <td>Epic No :</td>
-                                        <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
-                                            class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">N</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">L</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">W</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">3</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">7</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">4</div>
+                                            @foreach ($aadhar_char as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -369,29 +333,17 @@
                             <table>
                                 <tbody>
                                     <tr>
+                                        @php
+                                            $pan_char = str_split($borrower->pan_no);
+                                        @endphp
                                         <td>Pan No :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">B</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">L</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">S</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">P</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">A</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">7</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">H</div>
+                                            @foreach ($pan_char as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+
                                         </td>
                                         <td>or Form 60 :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
@@ -405,30 +357,18 @@
                                 alt="">
                             <table>
                                 <tbody>
+                                    @php
+                                        $mobile_char = str_split($borrower->contact_number);
+                                    @endphp
                                     <tr>
                                         <td>Mobile No :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">7</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">9</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">8</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">3</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">1</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">4</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">3</div>
+                                            @foreach ($mobile_char as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+
                                         </td>
                                     </tr>
                                 </tbody>
@@ -437,95 +377,107 @@
                                 alt="">
                             <table>
                                 <tbody>
+                                    @php
+                                        $market_char = str_split($singleloanDetails->market->market_name);
+                                    @endphp
                                     <tr>
                                         <td>Market Name :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">B</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">a</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">n</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">g</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">a</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">l</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">b</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">a</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">r</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">i</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box"> </div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">A</div>
+                                            @foreach ($market_char as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+
                                         </td>
+                                        @php
+                                            $market_code_char = str_split($singleloanDetails->market->id);
+                                        @endphp
                                         <td>Market Code :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">1</div>
+                                            @foreach ($market_code_char as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                             <table>
                                 <tbody>
+                                    @php
+                                        $loan_amount_char = str_split($singleloanDetails->principle_amount);
+                                    @endphp
                                     <tr>
                                         <td>Loan Amount :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">3</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
+                                            @foreach ($loan_amount_char as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+
                                         </td>
+                                        @php
+                                            $loan_cycle_char = str_split($singleloanDetails->loan_terms);
+                                        @endphp
                                         <td>Loan Cycle :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">1</div>
+                                            @foreach ($loan_cycle_char as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">{{ $char }}</div>
+                                            @endforeach
+
                                         </td>
+
+                                        @php
+                                            $year = substr($singleloanDetails->approve_date, 0, 4);
+                                            $month = substr($singleloanDetails->approve_date, 5, 2);
+                                            $day = substr($singleloanDetails->approve_date, 8, 2);
+                                        @endphp
+
                                         <td>Loan Date :</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">1</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
+                                            <!-- Day -->
+                                            @foreach (str_split($day) as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">
+                                                    {{ $char }}
+                                                </div>
+                                            @endforeach
+
+                                            <!-- Separator -->
                                             <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
                                                 class="letter-box">/</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">7</div>
+
+                                            <!-- Month -->
+                                            @foreach (str_split($month) as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">
+                                                    {{ $char }}
+                                                </div>
+                                            @endforeach
+
+                                            <!-- Separator -->
                                             <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
                                                 class="letter-box">/</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">4</div>
+
+                                            <!-- Year -->
+                                            @foreach (str_split($year) as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">
+                                                    {{ $char }}
+                                                </div>
+                                            @endforeach
                                         </td>
+
                                     </tr>
                                 </tbody>
                             </table>
-                            <table>
+                            {{-- <table>
                                 <tbody>
                                     <tr>
                                         <td>Purpose of Loan :</td>
@@ -630,7 +582,7 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> --}}
 
                             <img src="https://anusilanservices.com/loanIII/assets/form/Loan Application Form final799.png"
                                 alt="">
@@ -660,30 +612,50 @@
                             <table>
                                 <tbody>
                                     <tr>
+                                        @php
+                                            use Carbon\Carbon;
+                                            $todaysDate = Carbon::now()->format('d/m/Y'); // Format today's date as "dd/mm/yyyy"
+                                            $day = substr($todaysDate, 0, 2);
+                                            $month = substr($todaysDate, 3, 2);
+                                            $year = substr($todaysDate, 6, 4);
+                                        @endphp
+
                                         <td style="padding-bottom: 35px;">Date</td>
                                         <td style="display: flex; gap: 0; width: auto; border: 1px solid black; overflow: hidden; padding: 0; margin-bottom: 3px;"
                                             class="name-box">
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">1</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
+                                            <!-- Day -->
+                                            @foreach (str_split($day) as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">
+                                                    {{ $char }}
+                                                </div>
+                                            @endforeach
+
+                                            <!-- Separator -->
                                             <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
                                                 class="letter-box">/</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">7</div>
+
+                                            <!-- Month -->
+                                            @foreach (str_split($month) as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">
+                                                    {{ $char }}
+                                                </div>
+                                            @endforeach
+
+                                            <!-- Separator -->
                                             <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
                                                 class="letter-box">/</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">0</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">2</div>
-                                            <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
-                                                class="letter-box">4</div>
+
+                                            <!-- Year -->
+                                            @foreach (str_split($year) as $char)
+                                                <div style="width: 20px; display: flex; justify-content: center; align-items: center; border-right: 1px solid black; box-sizing: border-box;"
+                                                    class="letter-box">
+                                                    {{ $char }}
+                                                </div>
+                                            @endforeach
                                         </td>
+
                                         <td>Thumb Imp :
                                             <textarea style="margin-top: -18px; margin-left: 90px; border: 1px solid black;" rows="3"></textarea>
                                         </td>
@@ -784,11 +756,10 @@
         function printDiv() {
             var printContents = document.getElementById('printableContent').innerHTML;
             var originalContents = document.body.innerHTML;
-        
+
             document.body.innerHTML = printContents;
             window.print();
             document.body.innerHTML = originalContents;
         }
-        </script>
-        
+    </script>
 @endsection
