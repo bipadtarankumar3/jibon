@@ -6,7 +6,7 @@
 
     <div class="money_table">
         <div class="text-end mb-3">
-            <a class="common_btn" href="#" data-bs-toggle="modal" data-bs-target="#createLoanTypeModal">Create Loan Type</a>
+            {{-- <a class="common_btn" href="#" data-bs-toggle="modal" data-bs-target="#createLoanTypeModal">Create Loan Type</a> --}}
         </div>
         <table class="table" id="zero_config">
             <thead>
@@ -27,11 +27,11 @@
                         <a href="#" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#editLoanTypeModal{{ $loanType->id }}">
                             <span class="material-symbols-outlined">edit</span>
                         </a>
-                        <form action="{{ route('admin.loan-types.destroy', $loanType->id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
+                        {{-- <form action="{{ route('admin.loan-types.destroy', $loanType->id) }}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-link p-0"><span class="material-symbols-outlined">delete</span></button>
-                        </form>
+                        </form> --}}
                     </td>
                 </tr>
 

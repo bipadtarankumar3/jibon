@@ -1,5 +1,14 @@
 @extends('admin.layouts.main')
 @section('content')
+    
+<style>
+
+.actions.clearfix ul li:last-child {
+    display: none;
+}
+
+</style>
+
     <div class="right_part">
         <h3 class="pageTitlw">Borrowers</h3>
         <form class="common_form" action="{{ route('admin.brrowers.store') }}" method="post" enctype="multipart/form-data">
@@ -44,7 +53,7 @@
                                 <div class="attachment">
                                     <label>Attachment: <span class="plus" onclick="addAttachment()">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
-                                                width="24px" fill="#e8eaed">
+                                                width="24px" fill="green">
                                                 <path
                                                     d="M440-280h80v-160h160v-80H520v-160h-80v160H280v80h160v160Zm40 200q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
                                             </svg>
@@ -58,7 +67,7 @@
                             <div class="row gy-3">
                                 <div class="col-4">
                                     <label>First Name :</label>
-                                    <input type="text" class="form-control" name="first_name">
+                                    <input type="text" class="form-control" name="first_name" required>
                                 </div>
                                 <div class="col-4">
                                     <label>Middle Name (optional) :</label>
@@ -66,7 +75,7 @@
                                 </div>
                                 <div class="col-4">
                                     <label>Last Name :</label>
-                                    <input type="text" class="form-control" name="last_name">
+                                    <input type="text" class="form-control" name="last_name" required>
                                 </div>
                                 <div class="col-12">
                                     <label>Father/Husband Name :</label>
@@ -204,13 +213,32 @@
                             <input type="text" id="note" class="form-control" name="note">
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class=" mt-4" style="text-align: end;
+    position: absolute;
+    right: 0px;">
+                                <button type="submit" class="btn btn-outline-info" style="background: #327ec4;
+                                    padding: 10px 20px;
+                                    border-radius: 40px;
+                                    font-size: 16px;
+                                    text-transform: capitalize;
+                                    border:1px solid #327ec4;
+                                    color: #fff;
+                                    min-width: 140px;
+                                    text-align: center;">
+                                    Finish
+                                </button>
+                
+                            </div>
+                        </div>
+                    </div>
+                    
                 </section>
 
             </div>
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Save</button>
-
-            </div>
+            
         </form>
     </div>
 @endsection
@@ -283,7 +311,7 @@
             attachmentDiv.innerHTML = `
             <label>Attachment: 
                 <span class="delete" onclick="removeAttachment(this)"> 
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#e8eaed">
+                    <svg style="background: red;" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#e8eaed">
                         <path d="M19 6h-2V4c0-1.1-.9-2-2-2H9C7.9 2 7 2.9 7 4v2H5c-1.1 0-2 .9-2 2v2c0 1.1.9 2 2 2h1v8c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-8h1c1.1 0 2-.9 2-2v-2c0-1.1-.9-2-2-2zm-5 14H10v-8h4v8zm3-10H6V8h12v2z"/>
                     </svg>
                 </span>

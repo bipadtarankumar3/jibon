@@ -78,28 +78,31 @@ class TransactionController extends Controller
         foreach ($emi_id as $key => $value) {
             // Only process if the checkbox is checked
             if ($value) {
+
+                if (isset($amount[$key]) && $amount[$key] > 0) {
     
-                $emi = Emi::select('emis.*', 'brrowers_loan_details.loan_unique_id', 'brrowers_loan_details.total_amount', 'users.first_name', 'users.last_name')
-                ->join('brrowers_loan_details', 'brrowers_loan_details.id', 'emis.loan_id')
-                ->join('users', 'users.id', 'emis.user_id')
-                ->where('emis.id',$value)
-                ->first();
+                    $emi = Emi::select('emis.*', 'brrowers_loan_details.loan_unique_id', 'brrowers_loan_details.total_amount', 'users.first_name', 'users.last_name')
+                    ->join('brrowers_loan_details', 'brrowers_loan_details.id', 'emis.loan_id')
+                    ->join('users', 'users.id', 'emis.user_id')
+                    ->where('emis.id',$value)
+                    ->first();
 
-                // Insert the transaction record
-                DB::table('transactions')->insert([
-                    'trans_user_id' => $emi->user_id, // Or any other user ID
-                    'trans_loan_id' => $emi->loan_id,
-                    'trans_emi_id' => $value,
-                    'trans_emi_amount' => $amount[$key],
-                    'payment_date' => $date,
-                    'status' => 'pending', // Update status if needed
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
-                Emi::where('id',$value)->update(['status'=>'paid']);
+                    // Insert the transaction record
+                    DB::table('transactions')->insert([
+                        'trans_user_id' => $emi->user_id, // Or any other user ID
+                        'trans_loan_id' => $emi->loan_id,
+                        'trans_emi_id' => $value,
+                        'trans_emi_amount' => $amount[$key],
+                        'payment_date' => $date,
+                        'status' => 'pending', // Update status if needed
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                    Emi::where('id',$value)->update(['status'=>'paid']);
 
-                if($emi->remaining_amount == 0){
-                    Loan::where('id',$emi->loan_id)->update(['final_paid'=>'Paid']);
+                    if($emi->remaining_amount == 0){
+                        Loan::where('id',$emi->loan_id)->update(['final_paid'=>'Paid']);
+                    }
                 }
 
             }

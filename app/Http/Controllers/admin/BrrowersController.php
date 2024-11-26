@@ -148,7 +148,6 @@ class BrrowersController extends Controller
     {
 
         $validatedData = $request->validate([
-            'profileimg' => 'required|string',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
         ]);

@@ -1,6 +1,14 @@
 @extends('admin.layouts.main')
 @section('content')
 
+<style>
+
+    .actions.clearfix ul li:last-child {
+        display: none;
+    }
+    
+    </style>
+
 
     <div class="right_part">
         <h3 class="pageTitlw">Borrowers</h3>
@@ -274,13 +282,32 @@
                                 value="{{ $brrowers->note }}x">
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class=" mt-4" style="text-align: end;
+    position: absolute;
+    right: 0px;">
+                                <button type="submit" class="btn btn-outline-info" style="background: #327ec4;
+                                    padding: 10px 20px;
+                                    border-radius: 40px;
+                                    font-size: 16px;
+                                    text-transform: capitalize;
+                                    border:1px solid #327ec4;
+                                    color: #fff;
+                                    min-width: 140px;
+                                    text-align: center;">
+                                    Finish
+                                </button>
+                
+                            </div>
+                        </div>
+                    </div>
+
                 </section>
 
             </div>
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-success">Save</button>
-                <button type="button" class="btn btn-secondary" onclick="closeForm()">Close</button>
-            </div>
+            
         </form>
     </div>
 
