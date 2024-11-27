@@ -62,7 +62,7 @@
                                 <input type="hidden" name="emi_id[{{ $key }}]" value="{{ $item->id }}">
                             </td>
                             <td>
-                                <input type="number" name="amount[{{ $key }}]" disabled class="numberField">
+                                <input type="number" name="amount[{{ $key }}]" disabled class="numberField amount_number_val">
                             </td>
                         </tr>
                     @endforeach
@@ -78,7 +78,7 @@
                         <td><strong>{{ number_format($grandRemainingAmount, 2) }}</strong></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td class="amount_total">0.00</td>
                     </tr>
             
                     <!-- Submit Button Row -->
@@ -99,27 +99,67 @@
 
 @section('js')
 <script>
- document.addEventListener("DOMContentLoaded", function() {
+//  document.addEventListener("DOMContentLoaded", function() {
+//     // Toggle the "Amount" input field based on checkbox selection
+//     document.querySelectorAll('.toggle-disable').forEach(checkbox => {
+//         checkbox.addEventListener('change', function() {
+//             const numberField = this.closest('tr').querySelector('.numberField');
+//             numberField.disabled = !this.checked;
+//             checkAmountFields(); // Check if any amount field has a value
+//         });
+//     });
+
+//     // Show or hide the "Submit" button based on input in "Amount" fields
+//     document.querySelectorAll('.numberField').forEach(input => {
+//         input.addEventListener('input', checkAmountFields);
+//     });
+
+//     // Function to enable/disable the Submit button based on "Amount" fields
+//     function checkAmountFields() {
+//         const submitButton = document.getElementById('submitButton');
+//         const hasValue = Array.from(document.querySelectorAll('.numberField')).some(input => input.value > 0);
+//         submitButton.disabled = !hasValue; // Enable if any amount field has a value
+//     }
+// });
+
+document.addEventListener("DOMContentLoaded", function() {
     // Toggle the "Amount" input field based on checkbox selection
     document.querySelectorAll('.toggle-disable').forEach(checkbox => {
         checkbox.addEventListener('change', function() {
             const numberField = this.closest('tr').querySelector('.numberField');
             numberField.disabled = !this.checked;
+            updateAmountTotal(); // Update total whenever a checkbox is toggled
             checkAmountFields(); // Check if any amount field has a value
         });
     });
 
     // Show or hide the "Submit" button based on input in "Amount" fields
     document.querySelectorAll('.numberField').forEach(input => {
-        input.addEventListener('input', checkAmountFields);
+        input.addEventListener('input', function() {
+            updateAmountTotal(); // Update total whenever an amount value changes
+            checkAmountFields(); // Enable/disable the Submit button
+        });
     });
+
+    // Function to calculate and update the total of "Amount" fields
+    function updateAmountTotal() {
+        const totalElement = document.querySelector('.amount_total'); // Select the total cell
+        const total = Array.from(document.querySelectorAll('.numberField'))
+            .filter(input => !input.disabled) // Include only enabled fields
+            .reduce((sum, input) => sum + (parseFloat(input.value) || 0), 0); // Sum up the values
+        totalElement.textContent = total.toFixed(2); // Update the total with 2 decimal places
+    }
 
     // Function to enable/disable the Submit button based on "Amount" fields
     function checkAmountFields() {
         const submitButton = document.getElementById('submitButton');
-        const hasValue = Array.from(document.querySelectorAll('.numberField')).some(input => input.value > 0);
+        const hasValue = Array.from(document.querySelectorAll('.numberField'))
+            .filter(input => !input.disabled) // Include only enabled fields
+            .some(input => parseFloat(input.value) > 0); // Check if any has a value > 0
         submitButton.disabled = !hasValue; // Enable if any amount field has a value
     }
 });
+
+
 </script>
 @endsection

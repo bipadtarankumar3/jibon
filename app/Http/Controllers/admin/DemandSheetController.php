@@ -27,7 +27,9 @@ class DemandSheetController extends Controller
         $query = DB::table('brrowers_loan_details')
                     ->leftJoin('users', 'users.id', '=', 'brrowers_loan_details.user_id')
                     ->leftJoin(DB::raw('(SELECT trans_loan_id, SUM(trans_emi_amount) as emi_paid FROM transactions GROUP BY trans_loan_id) as trn'), 'trn.trans_loan_id', '=', 'brrowers_loan_details.id')
-                    ->select('brrowers_loan_details.*', 'users.first_name', 'users.last_name', 'trn.emi_paid', DB::raw('brrowers_loan_details.total_amount - trn.emi_paid as due_amount'));
+                    ->select('brrowers_loan_details.*', 'users.first_name', 'users.last_name', 'trn.emi_paid', DB::raw('brrowers_loan_details.total_amount - trn.emi_paid as due_amount'))
+                    ->where('users.user_type', '=', 'brrowers')
+                    ;
 
         // Apply filters if set
         if ($marketId) {
